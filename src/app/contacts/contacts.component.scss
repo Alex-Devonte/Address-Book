@@ -1,0 +1,58 @@
+@import '../../styles/styles.scss';
+
+$text-color-primary: $rich-black-fogra-29;
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+.box {
+  border: 1px solid black;
+}
+
+.contact-list-container {
+  border: 1px solid #000;
+  height: 70vh;
+}
+
+.search-container {
+  margin: 10px 0;
+}
+
+#contact-list {
+  border: 1px solid #000;
+  list-style-type: none;
+  padding: 0;
+} 
+
+.contact {
+  
+}
+
+.contact:nth-child(odd) {
+  border-bottom: 1px solid #000;
+}
+
+.contact:nth-child(even) {
+  border-bottom: 1px solid #000;
+}
+
+.contact:last-child {
+  border-bottom: none;
+}
+
+.contact-link {
+  color: #000;
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+
+  &:hover {
+    @include transition(background-color .2s ease);
+    background-color: gray;
+  }
+}

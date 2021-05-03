@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <form (ngSubmit)="onSubmit(registrationForm)" #registrationForm="ngForm">
+        <div *ngIf="registrationError.length > 0" class="alert alert-danger">{{ registrationError }}</div>
+        <div *ngIf="errorArr.length > 0" class="alert alert-danger">
+          <p *ngFor="let err of errorArr">
+            {{ err }}
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input type="text" class="form-control" id="first-name" name="firstName" required ngModel #firstName="ngModel" pattern="^[a-zA-Z]*$">
+          <div *ngIf="firstName.touched && !firstName.value" class="alert alert-danger">
+            First name is required
+          </div>
+          <div *ngIf="firstName.touched && firstName.errors?.pattern" class="alert alert-danger">
+            First name should only include letters
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input type="text" class="form-control" id="last-name" name="lastName" required ngModel #lastName="ngModel" pattern="^[a-zA-Z]*$">
+          <div *ngIf="lastName.touched && !lastName.value" class="alert alert-danger">
+            Last name is required
+          </div>
+          <div *ngIf="lastName.touched && lastName.errors?.pattern" class="alert alert-danger">
+            Last name should only include letters
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" name="email" (keyup)="checkEmail(registrationForm)"  required ngModel email #email="ngModel">
+          <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+            Please enter a valid email address <span class="error-help">e.g: email@domain.com</span>
+          </div>
+          <div *ngIf="emailExists" class="alert alert-danger">
+            {{ error }}
+          </div>
+        </div>
+        <div ngModelGroup="passwordsGroup" #passwordsGroup="ngModelGroup" appConfirmPassword>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required ngModel #password="ngModel" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}">
+          </div>
+          <div *ngIf="password.touched && password.errors?.pattern" class=" alert alert-danger">
+            <ul>
+              <li>Password must be a <span class="error-help">minimum of 6 characters</span></li>
+              <li>Password must contain at least <span class="error-help">1 lowercase letter</span></li>
+              <li>Password must contain at least <span class="error-help">1 uppercase letter</span></li>
+              <li>Password must contain at least <span class="error-help">1 number</span></li>
+            </ul>
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" class="form-control" id="confirm-password" name="confirmPassword" required ngModel #confirmPassword="ngModel">
+            <div *ngIf="confirmPassword.touched && passwordsGroup.errors?.mustMatch" class="alert alert-danger">
+              Passwords do not match
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="registrationForm.invalid || emailExists">Register</button>
+      </form>
+      <a routerLink="/login">Already have an account? Login here.</a>
+    </div>
+  </div>
+</div>
