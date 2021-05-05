@@ -12,6 +12,7 @@ import { ContactComponent } from './contacts/contact/contact.component';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { ConfirmPasswordDirective } from './confirm-password.directive';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
     ContactComponent,
     ContactEditComponent,
     ConfirmPasswordDirective,
-    DashboardComponent
+    DashboardComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
