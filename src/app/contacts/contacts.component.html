@@ -1,14 +1,13 @@
-<h3>Contact List</h3>
 <div class="container float-left w-auto contact-list-container">
   <div class="search-container w-100">
     <input type="search" class="form-control" placeholder="Search Contacts . . .">
   </div>
   <ul id="contact-list">
     <li *ngFor="let contact of contactList" class="contact">
-      <a href="" class="contact-link">
-        <span class="box">{{ contact.profilePicUrl }}</span>
-        {{ contact.firstName }} {{ contact.lastName }}
-      </a>
+    <a href="" class="contact-link">
+    <span class="box">{{ contact.profilePicUrl }}</span>
+    {{ contact.firstName }} {{ contact.lastName }}
+    </a>
     </li>
   </ul>
   <button class="btn btn-primary">Add Contact</button>
