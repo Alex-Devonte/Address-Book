@@ -11,7 +11,7 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { ContactComponent } from './contacts/contact/contact.component';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { ConfirmPasswordDirective } from './confirm-password.directive';
-import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 
 @NgModule({
