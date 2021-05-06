@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 
- const tokenKey: string = "userInfo";
+
 
 @Injectable({
   providedIn: 'root'
 }) 
 
 export class TokenStorageService {
-
+  tokenKey: string = "userInfo";
   constructor() { }
 
   saveToken(token: any) {
-    localStorage.setItem(tokenKey, JSON.stringify(token));
+    localStorage.setItem(this.tokenKey, JSON.stringify(token));
   }
 
   getToken() {
-    return JSON.parse(localStorage.getItem(tokenKey) || '{}');
+    return JSON.parse(localStorage.getItem(this.tokenKey) || '{}');
   }
 }
