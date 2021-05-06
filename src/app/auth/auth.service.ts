@@ -21,6 +21,6 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    return this.http.post(this.loginUrl, {email: email, password: password}, {responseType: 'text'});
+    return this.http.post(this.loginUrl, {email: email, password: password});
   }
 }
