@@ -1,5 +1,6 @@
 import { Component, DoCheck, OnChanges, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
+import { User } from '../shared/models/user-model';
 import { TokenStorageService } from '../token-storage.service';
 
 @Component({
@@ -9,8 +10,9 @@ import { TokenStorageService } from '../token-storage.service';
 })
 export class HeaderComponent implements OnInit, DoCheck {
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService ) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService ) {}
   loggedIn = false;
+  user = new User("", "", "", "");
 
   ngOnInit(): void {
   }
@@ -21,7 +23,12 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   checkLogin() {
     if (localStorage.getItem(this.tokenStorage.tokenKey)) {
+      let userInfo = JSON.parse(localStorage?.getItem(this.tokenStorage.tokenKey) || '{}');
       this.loggedIn = true;
+      
+      this.user.firstName = userInfo.firstName;
+      this.user.lastName = userInfo.lastName;
+      this.user.email = userInfo.email;
     } else {
       this.loggedIn = false;
     }
