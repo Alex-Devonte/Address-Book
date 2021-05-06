@@ -23,4 +23,8 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http.post(this.loginUrl, {email: email, password: password});
   }
+  
+  logout() {
+    localStorage.clear();
+  }
 }
