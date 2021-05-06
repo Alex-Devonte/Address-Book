@@ -1,0 +1,19 @@
+@import "styles.scss";
+
+nav {
+  background-color: $rich-black-fogra-29 !important;
+  margin-bottom: 10px;
+}
+
+.navbar-brand {
+  font-style: italic;
+}
+
+.navbar-brand:hover {
+  color: $dutch-white;
+}
+
+//Keep link highlighted while dropdown is active
+.show > .navbar-brand {
+  color: $dutch-white;
+}
