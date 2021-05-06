@@ -7,6 +7,7 @@
   //Get raw data
   $data = json_decode(file_get_contents("php://input"));
   $data = array_values((array)$data);
+  $returnData = ["login" => false, "userInfo" => []];
   $selectQuery = "SELECT * FROM users WHERE email = :email";
 
   try 
@@ -22,7 +23,12 @@
       $row = $statement->fetch(PDO::FETCH_ASSOC);
       if (password_verify($data[1], $row['password']))
       {
-        echo "1";
+        $returnData["login"] = true;
+        $returnData["userInfo"]["id"] = $row["user_id"];
+        $returnData["userInfo"]["firstName"] = $row["first_name"];
+        $returnData["userInfo"]["lastName"] = $row["last_name"];
+        $returnData["userInfo"]["email"] = $row["email"];
+        echo json_encode($returnData);
       }
     }
   }
