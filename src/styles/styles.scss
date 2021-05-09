@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'palette';
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+
 html, body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   height: calc(100vh - 56px);
+  margin: 0; 
 }
