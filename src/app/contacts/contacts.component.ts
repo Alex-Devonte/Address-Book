@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenStorageService } from '../token-storage.service';
+import { ContactsService } from './contacts.service';
 
 @Component({
   selector: 'app-contacts',
@@ -7,15 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactsComponent implements OnInit {
 
-  contactList = [
-    {firstName: "John", lastName: "Doe", profilePicUrl: "somePath"},
-    {firstName: "Jdfsdfsdfsdfsfsfohnny", lastName: "Doe", profilePicUrl: "somePath2"},
-    {firstName: "Jon", lastName: "Doe", profilePicUrl: "somePath3"}
-  ]
+  contactList = [{firstName: "", lastName: ""}];
+  userId = this.tokenStorage.getToken().id;
 
-  constructor() { }
+  constructor(private contactService: ContactsService, private tokenStorage: TokenStorageService) {}
 
   ngOnInit(): void {
+    this.contactList.pop();
+    this.getContactList();
+  }
+
+  getContactList() {
+    this.contactService.getContacts(this.userId).subscribe(res => {
+      let resData = Object.values(res);
+
+      for (var i = 0; i < resData.length; i++) {
+        let firstName = resData[i].first_name;
+        let lastName = resData[i].last_name;
+
+        this.contactList.push ({firstName: firstName, lastName: lastName});
+      }
+    });
   }
 
 }
