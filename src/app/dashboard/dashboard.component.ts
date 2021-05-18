@@ -9,7 +9,13 @@ export class DashboardComponent implements OnInit {
 
   constructor() { }
 
+  showForm = false;
+
   ngOnInit(): void {
+  }
+
+  showAddForm() {
+    this.showForm = !this.showForm;
   }
 
 }
