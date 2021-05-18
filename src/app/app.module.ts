@@ -19,6 +19,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { ContactAddComponent } from './contacts/contact-add/contact-add.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MatIconModule } from '@angular/material/icon';
     ContactEditComponent,
     ConfirmPasswordDirective,
     DashboardComponent,
-    HeaderComponent
+    HeaderComponent,
+    ContactAddComponent
   ],
   imports: [
     BrowserModule,
