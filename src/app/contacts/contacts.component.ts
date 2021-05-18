@@ -11,7 +11,6 @@ export class ContactsComponent implements OnInit {
 
   contactList = [{firstName: "", lastName: ""}];
   userId = this.tokenStorage.getToken().id;
-  displayContactForm = false;
   numberOfContacts = 0;
 
   constructor(private contactService: ContactsService, private tokenStorage: TokenStorageService) {}
@@ -32,9 +31,4 @@ export class ContactsComponent implements OnInit {
       }
     });
   }
-
-  addContact() {
-    this.displayContactForm = !this.displayContactForm;
-  }
-
 }
