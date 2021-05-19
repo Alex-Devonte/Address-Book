@@ -8,8 +8,8 @@ import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { ContactsComponent } from './contacts/contacts.component';
-import { ContactComponent } from './contacts/contact/contact.component';
-import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
+import { ContactComponent } from './dashboard/contacts/contact/contact.component';
+import { ContactEditComponent } from './dashboard/contacts/contact-edit/contact-edit.component';
 import { ConfirmPasswordDirective } from './confirm-password.directive';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
@@ -19,7 +19,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-import { ContactAddComponent } from './contacts/contact-add/contact-add.component';
+import { ContactAddComponent } from './dashboard/contacts/contact-add/contact-add.component';
 
 @NgModule({
   declarations: [
