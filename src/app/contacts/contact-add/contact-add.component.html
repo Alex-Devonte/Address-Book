@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="form-group">
-            <select class="form-control" id="email-type" name="emailType">
+            <select class="form-control" id="email-type" name="emailType" ngModel #emailType="ngModel">
               <option disabled selected value> -- select an option -- </option>
               <option value="Personal">Personal</option>
               <option value="Work">Work</option>
@@ -49,7 +49,7 @@
             <input type="tel" class="form-control" id="phone" name="phone" ngModel #phone="ngModel">
           </div>
           <div class="form-group">
-            <select class="form-control" id="phone-type" name="phoneType">
+            <select class="form-control" id="phone-type" name="phoneType" ngModel #phoneType="ngModel">
               <option disabled selected value> -- select an option -- </option>
               <option value="Mobile">Mobile</option>
               <option value="Home">Home</option>  
