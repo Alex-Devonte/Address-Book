@@ -29,9 +29,7 @@ export class ContactAddComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const contactData = form.value;
-    this.contactService.addContact(this.tokenStorage.getToken().id, contactData).subscribe(res => {
-      console.log(res);
-    });
+    this.contactService.addContact(this.tokenStorage.getToken().id, contactData).subscribe();
   }
 
 }
