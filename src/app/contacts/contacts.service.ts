@@ -13,8 +13,8 @@ export class ContactsService {
     return this.http.post(environment.getContactsUrl, {id: id});
   }
 
-  addContact(id: string) {
-    return this.http.post(environment.addContactUrl, {id: id});
+  addContact(id: string, data: any) {
+    return this.http.post(environment.addContactUrl, {id: id, data: data});
   }
 
   editContact(userId: string, contactId: string) {
