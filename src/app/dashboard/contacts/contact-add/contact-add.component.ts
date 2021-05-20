@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { TokenStorageService } from 'src/app/token-storage.service';
-import { ContactsService } from '../contacts.service';
+import { ContactsService } from '../../contacts/contacts.service';
 
 @Component({
   selector: 'app-contact-add',
