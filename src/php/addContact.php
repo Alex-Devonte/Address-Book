@@ -21,8 +21,12 @@
   $phoneType = $contactData['phoneGroup']['phoneType'];
   $profilePicSrc = $contactData['profilePic'];
   
-  validateEmail($contactData['emailGroup']['email'], $errors);
-  validatePhone($contactData['phoneGroup']['phone'], $errors);
+  if (!empty($email)){
+    validateEmail($contactData['emailGroup']['email'], $errors);
+  }
+  if (!empty($phone)) {
+    validatePhone($contactData['phoneGroup']['phone'], $errors);
+  }
 
   if (count($errors) == 0) {
     try 
