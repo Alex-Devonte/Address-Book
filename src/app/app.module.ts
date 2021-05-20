@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
-import { ContactsComponent } from './contacts/contacts.component';
+import { ContactsComponent } from './dashboard/contacts/contacts.component';
 import { ContactComponent } from './dashboard/contacts/contact/contact.component';
 import { ContactEditComponent } from './dashboard/contacts/contact-edit/contact-edit.component';
 import { ConfirmPasswordDirective } from './confirm-password.directive';
