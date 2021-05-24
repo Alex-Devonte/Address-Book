@@ -32,6 +32,9 @@ export class ContactsComponent implements OnInit, DoCheck {
       //Allows access to the properties tied to an Object
       let resData = Object.values(res);
 
+      //Clear array before loading in data
+      this.contactList.splice(0, this.contactList.length);
+      
       for (var i = 0; i < resData.length; i++) {
         let firstName = resData[i].first_name;
         let lastName = resData[i].last_name;
