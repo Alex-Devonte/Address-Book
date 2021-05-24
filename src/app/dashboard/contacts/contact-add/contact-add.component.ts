@@ -15,8 +15,8 @@ export class ContactAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //Access FileList form the File API to show a preview of the user's uploaded image
   showPreview(event: any) {
-    console.log(event.target.files);
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
 
@@ -30,6 +30,8 @@ export class ContactAddComponent implements OnInit {
   onSubmit(form: NgForm) {
     const contactData = form.value;
     this.contactService.addContact(this.tokenStorage.getToken().id, contactData).subscribe();
+    this.contactService.formSubmitted = true;
+    form.reset();
   }
 
 }
