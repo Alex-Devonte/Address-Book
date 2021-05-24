@@ -8,9 +8,10 @@ import { environment } from 'src/environments/environment';
 export class ContactsService {
 
   constructor(private http: HttpClient) { }
+  formSubmitted = false;
 
   getContacts(id: string) {
-    return this.http.post(environment.getContactsUrl, {id: id});
+    return this.http.post(environment.getContactsUrl, id);
   }
 
   addContact(id: string, data: any) {
