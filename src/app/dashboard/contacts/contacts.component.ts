@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { TokenStorageService } from '../../token-storage.service';
 import { ContactsService } from './contacts.service';
 
@@ -7,7 +7,7 @@ import { ContactsService } from './contacts.service';
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss']
 })
-export class ContactsComponent implements OnInit {
+export class ContactsComponent implements OnInit, DoCheck {
 
   contactList = [{firstName: "", lastName: ""}];
   userId = this.tokenStorage.getToken().id;
@@ -20,9 +20,18 @@ export class ContactsComponent implements OnInit {
     this.getContactList();
   }
 
+  ngDoCheck() {
+    if (this.contactService.formSubmitted) {
+      this.getContactList();
+      this.contactService.formSubmitted = false;
+    }
+  }
+
   getContactList() {
     this.contactService.getContacts(this.userId).subscribe(res => {
+      //Allows access to the properties tied to an Object
       let resData = Object.values(res);
+
       for (var i = 0; i < resData.length; i++) {
         let firstName = resData[i].first_name;
         let lastName = resData[i].last_name;
