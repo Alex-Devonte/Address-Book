@@ -22,13 +22,18 @@ export class ContactsComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     if (this.contactService.formSubmitted) {
-      this.getContactList();
+      //Use set timeout to prevent list from trying to update before database call was complete
+      setTimeout(() => {
+        this.getContactList();
+      }, 100);  
+      
       this.contactService.formSubmitted = false;
     }
   }
 
   getContactList() {
     this.contactService.getContacts(this.userId).subscribe(res => {
+      console.log(res);
       //Allows access to the properties tied to an Object
       let resData = Object.values(res);
 
