@@ -10,11 +10,15 @@ import { ContactsService } from '../contacts.service';
 })
 export class ContactComponent implements OnInit {
 
-  constructor(private contactService: ContactsService) { }
+  constructor(private route: ActivatedRoute, private contactService: ContactsService) { }
   contact = [new Contact("","","","","","","","","","")];
 
   ngOnInit(): void {
-
+    //Allows ngOnInit to be called every time route changes instead of just once when component is created
+    this.route.paramMap.subscribe(params => {
+      let id = params.get('id');
+      this.getContact(id);
+    })
   }
 
   getContact(id: any) {
