@@ -1,5 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Contact } from 'src/app/shared/models/contact-model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,8 +12,13 @@ export class ContactsService {
   constructor(private http: HttpClient) { }
   formSubmitted = false;
 
+
   getContacts(id: string) {
     return this.http.post(environment.getContactsUrl, id);
+  }
+
+  getContact(id: any): Observable<any> {
+    return this.http.get(environment.getContactUrl, {params: {id: id}});
   }
 
   addContact(id: string, data: any) {
