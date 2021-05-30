@@ -10,7 +10,7 @@ import { ContactsService } from './contacts.service';
 })
 export class ContactsComponent implements OnInit, DoCheck {
 
-  contactList = [new Contact("","","","","","","","","","")];
+  contactList = this.contactService.contactList;
 
   userId = this.tokenStorage.getToken().id;
   numberOfContacts = 0;
