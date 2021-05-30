@@ -11,7 +11,7 @@ export class ContactsService {
 
   constructor(private http: HttpClient) { }
   formSubmitted = false;
-
+  contactList = [new Contact("","","","","","","","","","")];
 
   getContacts(id: string) {
     return this.http.post(environment.getContactsUrl, id);
