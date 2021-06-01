@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Contact } from 'src/app/shared/models/contact-model';
 import { ContactsService } from '../contacts.service';
 
@@ -10,7 +10,7 @@ import { ContactsService } from '../contacts.service';
 })
 export class ContactComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private contactService: ContactsService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService) { }
   contact = [new Contact("","","","","","","","","","")];
 
   ngOnInit(): void {
@@ -28,5 +28,11 @@ export class ContactComponent implements OnInit {
                                 res[0].phone_number, res[0].phone_type, res[0].profile_picture_path,
                                 res[0].user_id)];
     });
+  }
+
+  deleteContact() {
+   this.contactService.deleteContact(this.contact[0].id).subscribe(res => {
+     this.router.navigate(["/dashboard"]);
+   });
   }
 }
