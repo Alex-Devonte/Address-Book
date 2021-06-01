@@ -29,9 +29,7 @@ export class ContactsService {
     return this.http.put(environment.editContactUrl, {userId: userId, contactId: contactId});
   }
 
-  deleteContact(userId: string, contactId: string) {
-    let httpParams = new HttpParams().set(userId, userId);
-    httpParams.set(contactId, contactId);
-    return this.http.delete(environment.deleteContactUrl, {params: httpParams});
+  deleteContact(contactId: string) {
+    return this.http.request('DELETE', environment.deleteContactUrl, {body: contactId, responseType:"text"});
   }
 }
