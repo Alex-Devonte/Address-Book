@@ -1,0 +1,55 @@
+@import "styles"  ;
+
+div {
+  padding: 0;
+}
+
+.header {
+  background-color: $china-rose;
+  border-bottom: 5px solid #000;
+  padding: 25px;
+  text-align: center;
+
+  #contact-picture {
+    margin: 50px;
+    width: 128px;
+  }  
+
+  #contact-name {
+    font-size: 60px;
+    margin: 5px;
+    word-spacing: 5px;
+  }
+
+  .modify-links {
+    margin-top: 60px;
+    padding: 5px;
+  
+    a {
+      color: #fff;
+      font-size: 18px;
+      margin: 10px;
+    }
+  }
+}
+
+.section h2 {
+  font-size: 25px;
+}
+
+.phone-section {
+
+}
+
+.contact-type {
+  color: $slate-gray;
+  font-style: italic;
+}
+
+.email-section {
+
+}
+
+
+
+
