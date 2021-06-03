@@ -20,6 +20,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { ContactAddComponent } from './dashboard/contacts/contact-add/contact-add.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ContactAddComponent } from './dashboard/contacts/contact-add/contact-ad
     MatSliderModule,
     MatSidenavModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

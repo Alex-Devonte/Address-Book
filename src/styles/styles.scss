@@ -8,3 +8,6 @@ html, body {
   height: calc(100vh - 56px);
   margin: 0; 
 }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
