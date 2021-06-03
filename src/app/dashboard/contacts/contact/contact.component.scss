@@ -29,6 +29,11 @@ div {
       color: #fff;
       font-size: 18px;
       margin: 10px;
+
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
     }
   }
 }
