@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Contact } from 'src/app/shared/models/contact-model';
 import { ContactsService } from '../contacts.service';
 
@@ -10,8 +11,10 @@ import { ContactsService } from '../contacts.service';
 })
 export class ContactComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService, private modal: NgbModal) { }
   contact = [new Contact("","","","","","","","","","")];
+  @Output() close: EventEmitter<any> = new EventEmitter();
+  modalRef: any;
 
   ngOnInit(): void {
     //Allows ngOnInit to be called every time route changes instead of just once when component is created
@@ -32,7 +35,24 @@ export class ContactComponent implements OnInit {
 
   deleteContact() {
    this.contactService.deleteContact(this.contact[0].id).subscribe(res => {
+     this.modalRef.close();
      this.router.navigate(["/dashboard"]);
    });
   }
+
+  openModal(content: any) {
+    this.modalRef = this.modal.open(content);
+  }
+
+  // private getDismissReason(reason: any): string {
+  //   if (reason === ModalDismissReasons.ESC) {
+  //     return 'by pressing ESC';
+  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+  //     return 'by clicking on a backdrop';
+  //   } else {
+  //     return  `with: ${reason}`;
+  //   }
+  // }
 }
+
+
