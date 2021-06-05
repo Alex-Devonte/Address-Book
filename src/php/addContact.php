@@ -1,6 +1,7 @@
 <?php
 
   require_once("db_connect.php");
+  require_once("validationFunctions.php");
   header("Access-Control-Allow-Origin: *");
   header("Access-Control-Allow-Headers: Content-Type");
 
@@ -68,27 +69,6 @@
     catch (PDOException $e)
     {
       echo $e;
-    }
-  }
-    
-  function validateEmail($email, &$errors) {
-    if (preg_match("/^[a-z0-9._%. +-]+@[a-z0-9.-]+/", $email)) {
-      return true;
-    } else {
-      $errors[] = "Email must be in a valid format E.g: email@domain.com";
-      return false;
-    }
-  }
-
-  function validatePhone($phone, &$errors) {
-    if (ctype_digit($phone)) {
-      if (strlen(($phone)) == 10) {
-        return true;
-      } else {
-        $errors[] = "Phone number must be 10 numbers long";
-      }
-    } else {
-      $errors[] = "Phone number must only contain numbers";
     }
   }
 ?>

@@ -1,6 +1,7 @@
 <?php
 
   require_once("db_connect.php");
+  require_once("validationFunctions.php");
   header("Access-Control-Allow-Origin: *");
   header("Access-Control-Allow-Headers: Content-Type");
 
@@ -54,34 +55,6 @@
     if (empty($errors)) {
       return true;
     } else {
-      return false;
-    }
-  }
-
-  function validateName($nameKey, $nameValue, &$errors) {
-    //Check if name contains letters only
-    if (ctype_alpha($nameValue)) {
-      return true;
-    } else {
-      $errors[] = $nameKey . " must contain letters only";
-      return false;
-    }
-  }
-
-  function validateEmail($email, &$errors) {
-    if (preg_match("/^[a-z0-9._%. +-]+@[a-z0-9.-]+/", $email)) {
-      return true;
-    } else {
-      $errors[] = "Email must be in a valid format E.g: email@domain.com";
-      return false;
-    }
-  }
-
-  function validatePassword($password, &$errors) {
-    if (preg_match("/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}/", $password)) {
-      return true;
-    } else {
-      $errors[] = "Passwords must be a minimum of 6 characters and contain at least 1 number, 1 uppercase letter, and 1 lowercase letter";
       return false;
     }
   }
