@@ -6,7 +6,7 @@
         <img id="contact-picture" src="../../../../assets/contact_placeholder.png" alt="{{ contact[0].firstName }} Profile Picture">
         <h2 id="contact-name">{{ contact[0].firstName }} {{ contact[0].lastName }}</h2>
         <div class="modify-links">
-          <a href="">Edit Contact</a>
+          <a routerLink="../edit/{{ contact[0].id }}">Edit Contact</a>
           <a (click)="openModal(content)">Delete Contact</a>
         </div>   
       </div>
