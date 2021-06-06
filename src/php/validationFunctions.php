@@ -6,7 +6,7 @@
       if (!empty($value)) {
         continue;
       }
-    $errors[] = $key . " cannot be empty";
+      $errors[] = $key . " cannot be empty";
     }
     if (empty($errors)) {
       return true;
