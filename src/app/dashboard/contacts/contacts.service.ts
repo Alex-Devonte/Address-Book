@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Contact } from 'src/app/shared/models/contact-model';
 import { environment } from 'src/environments/environment';
@@ -25,8 +26,8 @@ export class ContactsService {
     return this.http.post(environment.addContactUrl, {id: id, data: data});
   }
 
-  editContact(userId: string, contactId: string) {
-    return this.http.put(environment.editContactUrl, {userId: userId, contactId: contactId});
+  editContact(contactId: string, updatedData: any) {
+    return this.http.put(environment.editContactUrl, {id: contactId, data: updatedData });
   }
 
   deleteContact(contactId: string) {
