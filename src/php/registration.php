@@ -43,19 +43,4 @@
       echo json_encode($response);
     }
   }
-
-  //Check if any user values are empty
-  function notEmpty($data, &$errors) {
-    foreach ($data as $key => $value) {
-      if (!empty($value)) {
-        continue;
-      }
-      $errors[] = $key . " cannot be empty";
-    }
-    if (empty($errors)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 ?>
