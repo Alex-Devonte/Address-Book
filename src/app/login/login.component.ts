@@ -19,10 +19,10 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
-    /*if (this.tokenStorage.getToken()) {
+    if (this.tokenStorage.getToken().id) {
       this.loggedIn = true;
-      //this.router.navigate(["/dashboard"]);
-    }*/
+      this.router.navigate(["/dashboard"]);
+    }
   }
 
   onSubmit(form: NgForm) {
