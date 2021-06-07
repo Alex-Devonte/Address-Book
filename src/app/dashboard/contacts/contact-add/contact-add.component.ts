@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/token-storage.service';
 import { ContactsService } from '../../contacts/contacts.service';
 
@@ -10,7 +11,7 @@ import { ContactsService } from '../../contacts/contacts.service';
 })
 export class ContactAddComponent implements OnInit {
   imageSrc: any;
-  constructor(private contactService: ContactsService, private tokenStorage: TokenStorageService) { }
+  constructor(private router: Router, private contactService: ContactsService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
   }
@@ -29,9 +30,10 @@ export class ContactAddComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const contactData = form.value;
-    this.contactService.addContact(this.tokenStorage.getToken().id, contactData).subscribe();
-    this.contactService.formSubmitted = true;
-    form.reset();
+    this.contactService.addContact(this.tokenStorage.getToken().id, contactData).subscribe(() => {
+      this.contactService.refreshContactList();
+      this.router.navigate(['/dashboard']);
+    });
   }
 
 }

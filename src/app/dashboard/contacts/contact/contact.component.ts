@@ -36,6 +36,7 @@ export class ContactComponent implements OnInit {
   deleteContact() {
    this.contactService.deleteContact(this.contact[0].id).subscribe(res => {
      this.modalRef.close();
+     this.contactService.refreshContactList();
      this.router.navigate(["/dashboard"]);
    });
   }

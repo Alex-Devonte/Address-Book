@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Contact } from 'src/app/shared/models/contact-model';
 import { TokenStorageService } from '../../token-storage.service';
 import { ContactsService } from './contacts.service';
@@ -8,29 +8,21 @@ import { ContactsService } from './contacts.service';
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss']
 })
-export class ContactsComponent implements OnInit, DoCheck {
+export class ContactsComponent implements OnInit {
 
   contactList = this.contactService.contactList;
 
   userId = this.tokenStorage.getToken().id;
   numberOfContacts = 0;
 
-  constructor(private contactService: ContactsService, private tokenStorage: TokenStorageService) {}
+  constructor(private contactService: ContactsService, private tokenStorage: TokenStorageService) {
+    this.contactService.refreshList$.subscribe(() => {
+      this.getContactList();
+    });
+  }
 
   ngOnInit(): void {
     this.getContactList();
-    
-  }
-
-  ngDoCheck() {
-    if (this.contactService.formSubmitted) {
-      //Use set timeout to prevent list from trying to update before database call was complete
-      setTimeout(() => {
-        this.getContactList();
-      }, 100);  
-      
-      this.contactService.formSubmitted = false;
-    }
   }
 
   getContactList() {

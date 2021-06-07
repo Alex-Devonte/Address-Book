@@ -31,6 +31,7 @@ export class ContactEditComponent implements OnInit {
     const formData = form.value;
     this.contactService.editContact(this.contactData[0].id, formData).subscribe((res: any) => {
       if (!res.hasErrors) {
+        this.contactService.refreshContactList();
         this.router.navigate(["dashboard"]);
       }
     });
