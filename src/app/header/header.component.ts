@@ -22,8 +22,8 @@ export class HeaderComponent implements OnInit, DoCheck {
   }
 
   checkLogin() {
-    if (localStorage.getItem(this.tokenStorage.tokenKey)) {
-      let userInfo = JSON.parse(localStorage?.getItem(this.tokenStorage.tokenKey) || '{}');
+    if (sessionStorage.getItem(this.tokenStorage.tokenKey)) {
+      let userInfo = JSON.parse(sessionStorage?.getItem(this.tokenStorage.tokenKey) || '{}');
       this.loggedIn = true;
       
       this.user.firstName = userInfo.firstName;
