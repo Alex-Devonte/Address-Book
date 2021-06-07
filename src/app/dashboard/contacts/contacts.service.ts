@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Contact } from 'src/app/shared/models/contact-model';
 import { environment } from 'src/environments/environment';
 
@@ -11,8 +11,15 @@ import { environment } from 'src/environments/environment';
 export class ContactsService {
 
   constructor(private http: HttpClient) { }
-  formSubmitted = false;
   contactList = [new Contact("","","","","","","","","","")];
+
+  //Use Subject and observable to signal when the contact list needs to be refreshed
+  private refresh = new Subject<any>();
+  refreshList$ = this.refresh.asObservable();
+
+  refreshContactList() {
+    this.refresh.next();
+  }
 
   getContacts(id: string) {
     return this.http.post(environment.getContactsUrl, id);
