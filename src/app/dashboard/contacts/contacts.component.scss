@@ -70,4 +70,12 @@ $text-color-primary: $rich-black-fogra-29;
 #contact-count-container {
   background-color: #000;
   color: #fff;
+
+  p {
+    margin: 0;
+  }
+}
+
+.add-btn {
+  width: 100%;
 }
