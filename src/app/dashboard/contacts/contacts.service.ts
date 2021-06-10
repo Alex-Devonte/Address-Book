@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class ContactsService {
 
   constructor(private http: HttpClient) { }
-  contactList = [new Contact("","","","","","","","","","")];
+  contactList = [new Contact("","","","",[{email: "", emailType: ""}],[{phone: "", phoneType: ""}],"","")];
 
   //Use Subject and observable to signal when the contact list needs to be refreshed
   private refresh = new Subject<any>();

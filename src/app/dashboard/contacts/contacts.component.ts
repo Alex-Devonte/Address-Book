@@ -38,14 +38,18 @@ export class ContactsComponent implements OnInit {
         let firstName = resData[i].first_name;
         let lastName = resData[i].last_name;
         let nickname = resData[i].nickname;
+
         let email = resData[i].email;
         let emailType = resData[i].email_type;
+
         let phone = resData[i].phone;
         let phoneType = resData[i].phoneType;
+        
         let picPath = resData[i].profile_picture_path; 
         let userId = resData[i].user_id;
+
         this.numberOfContacts = resData.length;
-        this.contactList.push(new Contact(id, firstName, lastName, nickname, email, emailType, phone, phoneType, picPath, userId));
+        this.contactList.push(new Contact(id, firstName, lastName, nickname, [{email, emailType}], [{phone, phoneType}], picPath, userId));
       }
     });
   }

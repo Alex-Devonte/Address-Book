@@ -12,7 +12,7 @@ import { ContactsService } from '../contacts.service';
 export class ContactEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService) { }
-  contactData = [new Contact("","","","","","","","","","")];
+  contactData = [new Contact("","","","",[{email: "", emailType: ""}],[{phone: "", phoneType: ""}],"","")];
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -21,8 +21,8 @@ export class ContactEditComponent implements OnInit {
       this.contactService.getContact(id).subscribe(res => {
         this.contactData = [new Contact(res[0].contact_id, res[0].first_name, res[0].last_name,
                                         res[0].nickname, res[0].email_address, res[0].email_type,
-                                        res[0].phone_number, res[0].phone_type, res[0].profile_picture_path,
-                                        res[0].user_id)];
+                                        res[0].phone_number, res[0].phone_type
+                                      )];
       });
     });
   }

@@ -12,7 +12,8 @@ import { ContactsService } from '../contacts.service';
 export class ContactComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService, private modal: NgbModal) { }
-  contact = [new Contact("","","","","","","","","","")];
+  
+  contact = [new Contact("","","","",[{email: "", emailType: ""}],[{phone: "", phoneType: ""}],"","")];
   @Output() close: EventEmitter<any> = new EventEmitter();
   modalRef: any;
 
@@ -26,10 +27,8 @@ export class ContactComponent implements OnInit {
 
   getContact(id: any) {
     this.contactService.getContact(id).subscribe(res => {
-     this.contact = [new Contact(res[0].contact_id, res[0].first_name, res[0].last_name,
-                                res[0].nickname, res[0].email_address, res[0].email_type,
-                                res[0].phone_number, res[0].phone_type, res[0].profile_picture_path,
-                                res[0].user_id)];
+     this.contact = [new Contact(res[0].contact_id, res[0].first_name, res[0].last_name, res[0].nickname, res.emailData,
+                                res.phoneData, res[0].profile_picture_path, res[0].user_id)];
     });
   }
 
