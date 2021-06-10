@@ -5,24 +5,40 @@
   header("Access-Control-Allow-Headers: Content-Type");
 
   $id = json_decode($_GET['id']);
-    
+  $emailInfo = [];
+  $phoneInfo = [];
+  $response = [];
+  
   try
   {
-    $selectQuery = "SELECT * FROM contacts 
-                    INNER JOIN email_addresses 
-                    ON contacts.contact_id = email_addresses.contact_id
-                    INNER JOIN phone_numbers
-                    ON contacts.contact_id = phone_numbers.contact_id
-                    WHERE contacts.contact_id = :id";
+    $selectQuery = "SELECT * FROM contacts WHERE contact_id = :id";
 
     $statement = $connection->prepare($selectQuery);
     $statement->execute(array(
       ":id" => $id
     ));
+    $response = $statement->fetchAll((PDO::FETCH_ASSOC));
 
-    $row = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    echo json_encode($row);
+    $selectQuery = "SELECT email_address, email_type FROM email_addresses WHERE contact_id = :id";
+    $statement = $connection->prepare($selectQuery);
+    $statement->execute((array(":id" => $id)));
+   
+    /*Create associative arrays to hold multiple phone numbers and email addresses if needed*/
+    while ($row = $statement->fetch()) {
+      $emailInfo[] =  ['email' => $row['email_address'], 'emailType' => $row['email_type']];
+    }
+
+    $selectQuery = "SELECT phone_number, phone_type FROM phone_numbers WHERE contact_id = :id";
+    $statement = $connection->prepare($selectQuery);
+    $statement->execute((array(":id" => $id)));
+
+    while ($row = $statement->fetch()) {
+      $phoneInfo[] = ['phone' => $row['phone_number'], 'phoneType' => $row['phone_type']];
+    }
+
+    $response = array_merge($response,array("emailData" => $emailInfo), array("phoneData" => $phoneInfo));
+    echo json_encode($response);
   }
   catch (PDOException $e) {
     echo $e;
