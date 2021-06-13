@@ -29,13 +29,19 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-6 phone-section section">
+    <div class="col-6 phone-section section"> 
       <h2>Phone Info</h2>
-      <p>{{ contact[0].phone }}</p>
-      <p class="contact-type">{{ contact[0].phoneType }}</p>
+      <div *ngFor="let phone of contact[0].phoneInfo;">
+        {{ phone.phone }}
+        <p class="contact-type">{{ phone.phoneType }}</p>
+      </div>
     </div>
     <div class="col-6 email-section section">
       <h2>Email Info</h2>
+      <div *ngFor="let email of contact[0].emailInfo">
+        {{ email.email }}
+        <p class="contact-type">{{ email.emailType }}</p>
+      </div>
     </div>
   </div>
 </div>
