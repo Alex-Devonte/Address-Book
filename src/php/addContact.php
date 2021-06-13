@@ -7,7 +7,7 @@
 
   $data = json_decode(file_get_contents("php://input"), true);
   $data = (array)$data;
-  
+
   $errors = [];
   $userId = $data['id'];
   $contactData = $data['data'];
@@ -16,17 +16,26 @@
   $lastName = $contactData['lastName'];
   $nickname = $contactData['nickname'];
 
-  $email = $contactData['emailGroup']['email'];
-  $emailType = $contactData['emailGroup']['emailType'];
-  $phone = $contactData['phoneGroup']['phone'];
-  $phoneType = $contactData['phoneGroup']['phoneType'];
-  $profilePicSrc = $contactData['profilePic'];
+  $emailGroup = $contactData['emailGroup'];
+  $phoneGroup = $contactData['phoneGroup'];
   
-  if (!empty($email)){
-    validateEmail($contactData['emailGroup']['email'], $errors);
+  $profilePicSrc = $contactData['profilePic'];
+
+  $emailCount = count($emailGroup);
+  $phoneCount = count($phoneGroup);
+  
+  for ($i = 0; $i < $emailCount; $i++) {
+    $email = $emailGroup[$i]['email'];
+    if (!empty($email)) {
+      validateEmail($email, $errors);
+    }
   }
-  if (!empty($phone)) {
-    validatePhone($contactData['phoneGroup']['phone'], $errors);
+
+  for ($i = 0; $i < $phoneCount; $i++) {
+    $phone = $phoneGroup[$i]['phone'];
+    if (!empty($phone)) {
+      validatePhone($phone, $errors);
+    }
   }
 
   if (count($errors) == 0) {
@@ -50,21 +59,27 @@
       $insertQuery = "INSERT INTO email_addresses (email_type, email_address, contact_id) 
                       VALUES (:type, :email, :id)";
       $statement = $connection->prepare($insertQuery);
-      $statement->execute(array(
-        "type" => $emailType,
-        "email" => $email,
-        "id" => $contactId
-      ));
+
+      for ($i = 0; $i < $emailCount; $i++) {
+        $statement->execute(array(
+          "type" => $emailGroup[$i]['emailType'],
+          "email" => $emailGroup[$i]['email'],
+          "id" => $contactId
+        ));
+      }
 
       //Insert for phone numbers table
       $insertQuery = "INSERT INTO phone_numbers (phone_type, phone_number, contact_id) 
                       VALUES (:type, :phone, :id)";
       $statement = $connection->prepare($insertQuery);
-      $statement->execute(array(
-        "type" => $phoneType,
-        "phone" => $phone,
-        "id" => $contactId
-      ));
+      for ($i = 0; $i < $phoneCount; $i++) {
+        $statement->execute(array(
+          "type" => $phoneGroup[$i]['phoneType'],
+          "phone" => $phoneGroup[$i]['phone'],
+          "id" => $contactId
+        ));
+      }
+
     }
     catch (PDOException $e)
     {
