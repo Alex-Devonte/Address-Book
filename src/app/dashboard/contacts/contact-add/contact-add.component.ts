@@ -25,9 +25,6 @@ export class ContactAddComponent implements OnInit {
     phoneType: ''     
   }];
 
-  emailInfo = [{email: '', emailType: ''}];
-  phoneInfo = [{phone: '', phoneType: ''}];
-  
   ngOnInit(): void {
   }
 
@@ -61,7 +58,6 @@ export class ContactAddComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const contactData = form.value;
-
     contactData.emailGroup = this.emails;
     contactData.phoneGroup = this.phones;
 
