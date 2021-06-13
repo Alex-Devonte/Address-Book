@@ -49,7 +49,7 @@ export class ContactsComponent implements OnInit {
         let userId = resData[i].user_id;
 
         this.numberOfContacts = resData.length;
-        this.contactList.push(new Contact(id, firstName, lastName, nickname, [{email, emailType}], [{phone, phoneType}], picPath, userId));
+        this.contactList.push(new Contact(id, firstName, lastName, nickname, [{id, email, emailType}], [{id, phone, phoneType}], picPath, userId));
       }
     });
   }

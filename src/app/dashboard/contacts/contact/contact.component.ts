@@ -13,7 +13,7 @@ export class ContactComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService, private modal: NgbModal) { }
   
-  contact = [new Contact("","","","",[{email: "", emailType: ""}],[{phone: "", phoneType: ""}],"","")];
+  contact = [new Contact("","","","",[{id: "", email: "", emailType: ""}],[{id: "", phone: "", phoneType: ""}],"","")];
   @Output() close: EventEmitter<any> = new EventEmitter();
   modalRef: any;
 
