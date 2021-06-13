@@ -12,21 +12,57 @@ import { ContactsService } from '../contacts.service';
 export class ContactEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService) { }
-  contactData = [new Contact("","","","",[{email: "", emailType: ""}],[{phone: "", phoneType: ""}],"","")];
+  contactData = [new Contact("","","","",[{id: "", email: "", emailType: ""}],[{id: "", phone: "", phoneType: ""}],"","")];
+
+  emails = [{
+    id: '',
+    email: '',
+    emailType: ''
+  }];
+
+  phones = [{
+    id: '',
+    phone: '',
+    phoneType: ''
+  }];
 
   ngOnInit(): void {
+    this.emails.pop();
+    this.phones.pop();
+
     this.route.paramMap.subscribe(params => {
       let id = params.get('id');
 
       this.contactService.getContact(id).subscribe(res => {
         this.contactData = [new Contact(res[0].contact_id, res[0].first_name, res[0].last_name,
                                         res[0].nickname, res.emailData, res.phoneData, res[0].profile_picture_path, res[0].user_id)];
+        
+        //Populate arrays with data from database to fill out form inputs utilizing two-way binding
+        for (let i = 0; i < this.contactData[0].emailInfo.length; i++) {
+          this.emails.push({
+            id: this.contactData[0].emailInfo[i].id,
+            email: this.contactData[0].emailInfo[i].email,
+            emailType: this.contactData[0].emailInfo[i].emailType
+          });
+        }
+
+        for (let i = 0; i < this.contactData[0].phoneInfo.length; i++) {
+          this.phones.push({
+            id: this.contactData[0].phoneInfo[i].id,
+            phone: this.contactData[0].phoneInfo[i].phone,
+            phoneType: this.contactData[0].phoneInfo[i].phoneType
+          });
+        }                                 
       });
     });
   }
 
   saveChanges(form: NgForm) {
     const formData = form.value;
+
+    formData.emailGroup = this.emails;
+    formData.phoneGroup = this.phones;
+
     this.contactService.editContact(this.contactData[0].id, formData).subscribe((res: any) => {
       if (!res.hasErrors) {
         this.contactService.refreshContactList();
