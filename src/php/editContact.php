@@ -16,10 +16,9 @@
   $firstName = "";
   $lastName = "";
   $nickname = $data['nickname'];
-  $email = "";
-  $emailType = $data['emailGroup']['emailType'];
-  $phone = "";
-  $phoneType = $data['phoneGroup']['phoneType'];
+
+  $emailGroup = $data['emailGroup'];
+  $phoneGroup = $data['phoneGroup'];
 
   if (validateName($dataKeys[1], $data['firstName'], $errors) && validateName($dataKeys[2], $data['lastName'], $errors)) {
     $firstName = $data['firstName'];
@@ -63,26 +62,33 @@
 
     $updateQuery = "UPDATE email_addresses
                     SET email_type = :type, email_address = :email 
-                    WHERE contact_id = :id";
+                    WHERE contact_id = :id AND email_id = :email_id";
     $statement = $connection->prepare($updateQuery);
-    $statement->execute(array(
-      ':type' => $emailType,
-      ':email' => $email,
-      ':id' => $id
-    ));
 
+    for ($i = 0; $i < count($emailGroup); $i++) {
+      $statement->execute(array(
+        ':type' => $emailGroup[$i]['emailType'],
+        ':email' => $emailGroup[$i]['email'],
+        ':id' => $id,
+        ':email_id' => $emailGroup[$i]['id']
+      ));
+    }
     $updateQuery = "UPDATE phone_numbers
                     SET phone_type = :type, phone_number = :phone
-                    WHERE contact_id = :id";
+                    WHERE contact_id = :id AND phone_id = :phone_id";
     $statement = $connection->prepare($updateQuery);
-    $statement->execute(array(
-      ':type' => $phoneType,
-      ':phone' => $phone,
-      ':id' => $id
-    ));
+
+    for ($i = 0; $i < count($phoneGroup); $i++) {
+      $statement->execute(array(
+        ':type' => $phoneGroup[$i]['phoneType'],
+        ':phone' => $phoneGroup[$i]['phone'],
+        ':id' => $id,
+        ':phone_id' => $phoneGroup[$i]['id']
+      ));
+    }
     
     $connection->commit();
-    echo json_encode($response);
+      echo json_encode($response);
   }
   catch (PDOException $e)
   {
