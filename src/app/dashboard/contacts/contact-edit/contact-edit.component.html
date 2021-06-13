@@ -2,6 +2,9 @@
   <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
       <form (ngSubmit)="saveChanges(editContactForm)" #editContactForm="ngForm">
+        <div  *ngFor="let _email of contactData[0].emailInfo; let i = index;">
+          {{_email.email}}
+        </div>
         <div class="from-group">
           <input type="file" accept="image/*" class="form-control-file" id="profile-pic" name="profilePic" ngModel #profilePic="ngModel">
           <!-- <img id="preview" [src]="imageSrc || 'http://placehold.it/180'" alt="preview" /> -->
@@ -27,16 +30,16 @@
           <label for="nickname">Nickname</label>
           <input type="text" class="form-control" id="nickname" name="nickname" ngModel #nickname="ngModel" [(ngModel)]="contactData[0].nickname">
         </div>
-        <div ngModelGroup="emailGroup" #emailGroup="ngModelGroup">
+        <div ngModelGroup="emailGroup" #emailGroup="ngModelGroup" *ngFor="let _email of emails;">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" ngModel email #email="ngModel"  [(ngModel)]="contactData[0].email">
-            <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+            <input type="email" class="form-control" id="email" name="email{{_email.id}}" ngModel email #email="ngModel"  [(ngModel)]="_email.email">
+            <!-- <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
               Please enter a valid email address <span class="error-help">e.g: email@domain.com</span>
-            </div>
+            </div> -->
           </div>
           <div class="form-group">
-            <select class="form-control" id="email-type" name="emailType" ngModel #emailType="ngModel"  [(ngModel)]="contactData[0].emailType">
+            <select class="form-control" id="email-type" name="emailType{{_email.id}}" ngModel #emailType="ngModel"  [(ngModel)]="_email.emailType">
               <option disabled selected value> -- select an option -- </option>
               <option value="Personal">Personal</option>
               <option value="Work">Work</option>
@@ -44,16 +47,16 @@
             </select>
           </div>
         </div>
-        <div ngModelGroup="phoneGroup" #phoneGroup="ngModelGroup">
+        <div ngModelGroup="phoneGroup" #phoneGroup="ngModelGroup" *ngFor="let _phone of phones;">
           <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="tel" class="form-control" id="phone" name="phone" ngModel #phone="ngModel" pattern="^\d{10}$"  [(ngModel)]="contactData[0].phone">
-            <div *ngIf="phone.touched && phone.invalid" class="alert alert-danger">
+            <input type="tel" class="form-control" id="phone" name="phone{{_phone.id}}" ngModel #phone="ngModel" pattern="^\d{10}$"  [(ngModel)]="_phone.phone">
+            <!-- <div *ngIf="phone.touched && phone.invalid" class="alert alert-danger">
               Phone numbers must be 10 digits long and contain only numbers 
-            </div>
+            </div> -->
           </div>
           <div class="form-group">
-            <select class="form-control" id="phone-type" name="phoneType" ngModel #phoneType="ngModel"  [(ngModel)]="contactData[0].phoneType">
+            <select class="form-control" id="phone-type" name="phoneType{{_phone.id}}" ngModel #phoneType="ngModel"  [(ngModel)]="_phone.phoneType">
               <option disabled selected value> -- select an option -- </option>
               <option value="Mobile">Mobile</option>
               <option value="Home">Home</option>  
