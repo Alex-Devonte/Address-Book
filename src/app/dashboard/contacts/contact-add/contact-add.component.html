@@ -27,16 +27,17 @@
           <label for="nickname">Nickname</label>
           <input type="text" class="form-control" id="nickname" name="nickname" ngModel #nickname="ngModel">
         </div>
-        <div ngModelGroup="emailGroup" #emailGroup="ngModelGroup">
+        <div class="btn btn-primary" (click)="addEmailField()">Add Email</div>
+        <div ngModelGroup="emailGroup" #emailGroup="ngModelGroup" *ngFor="let _email of emails; let i = index;">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" ngModel email #email="ngModel">
+            <input type="email" class="form-control" id="email" name="email{{_email.id}}" [(ngModel)]="_email.email" email #email="ngModel">
             <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
               Please enter a valid email address <span class="error-help">e.g: email@domain.com</span>
             </div>
           </div>
           <div class="form-group">
-            <select class="form-control" id="email-type" name="emailType" ngModel #emailType="ngModel">
+            <select class="form-control" id="email-type" name="emailType{{_email.id}}" [(ngModel)]="_email.emailType" #emailType="ngModel">
               <option disabled selected value> -- select an option -- </option>
               <option value="Personal">Personal</option>
               <option value="Work">Work</option>
@@ -44,16 +45,17 @@
             </select>
           </div>
         </div>
-        <div ngModelGroup="phoneGroup" #phoneGroup="ngModelGroup">
+        <div class="btn btn-primary" (click)="addPhoneField()">Add Phone</div>
+        <div ngModelGroup="phoneGroup" #phoneGroup="ngModelGroup" *ngFor="let _phone of phones; let i = index;">
           <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="tel" class="form-control" id="phone" name="phone" ngModel #phone="ngModel" pattern="^\d{10}$">
+            <input type="tel" class="form-control" id="phone" name="phone{{_phone.id}}" [(ngModel)]="_phone.phone" #phone="ngModel" pattern="^\d{10}$">
             <div *ngIf="phone.touched && phone.invalid" class="alert alert-danger">
               Phone numbers must be 10 digits long and contain only numbers 
             </div>
           </div>
           <div class="form-group">
-            <select class="form-control" id="phone-type" name="phoneType" ngModel #phoneType="ngModel">
+            <select class="form-control" id="phone-type" name="phoneType{{_phone.id}}" [(ngModel)]="_phone.phoneType" #phoneType="ngModel">
               <option disabled selected value> -- select an option -- </option>
               <option value="Mobile">Mobile</option>
               <option value="Home">Home</option>  

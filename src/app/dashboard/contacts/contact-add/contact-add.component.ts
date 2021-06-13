@@ -13,6 +13,21 @@ export class ContactAddComponent implements OnInit {
   imageSrc: any;
   constructor(private router: Router, private contactService: ContactsService, private tokenStorage: TokenStorageService) { }
 
+  emails = [{
+    id: 0,
+    email: '',
+    emailType: ''
+  }];
+
+  phones = [{
+    id: 0,
+    phone: '',
+    phoneType: ''     
+  }];
+
+  emailInfo = [{email: '', emailType: ''}];
+  phoneInfo = [{phone: '', phoneType: ''}];
+  
   ngOnInit(): void {
   }
 
@@ -25,15 +40,34 @@ export class ContactAddComponent implements OnInit {
       reader.onload = e => this.imageSrc = reader.result;
 
       reader.readAsDataURL(file);
+    }
+  } 
+
+  addEmailField() {
+    this.emails.push({
+      id: this.emails.length + 1,
+      email: '',
+      emailType: ''
+    });
   }
-}
+
+  addPhoneField() {
+    this.phones.push({
+      id: this.phones.length + 1,
+      phone: '',
+      phoneType: ''
+    });
+  }
 
   onSubmit(form: NgForm) {
     const contactData = form.value;
-    this.contactService.addContact(this.tokenStorage.getToken().id, contactData).subscribe(() => {
+
+    contactData.emailGroup = this.emails;
+    contactData.phoneGroup = this.phones;
+
+    this.contactService.addContact(this.tokenStorage.getToken().id, contactData).subscribe(res => {
       this.contactService.refreshContactList();
       this.router.navigate(['/dashboard']);
     });
   }
-
 }
