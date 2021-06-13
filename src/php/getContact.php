@@ -19,22 +19,21 @@
     ));
     $response = $statement->fetchAll((PDO::FETCH_ASSOC));
 
-
-    $selectQuery = "SELECT email_address, email_type FROM email_addresses WHERE contact_id = :id";
+    $selectQuery = "SELECT email_id, email_address, email_type FROM email_addresses WHERE contact_id = :id";
     $statement = $connection->prepare($selectQuery);
     $statement->execute((array(":id" => $id)));
    
     /*Create associative arrays to hold multiple phone numbers and email addresses if needed*/
-    while ($row = $statement->fetch()) {
-      $emailInfo[] =  ['email' => $row['email_address'], 'emailType' => $row['email_type']];
+    while ($row = $statement->fetch()) {  
+      $emailInfo[] =  ['id' => $row['email_id'], 'email' => $row['email_address'], 'emailType' => $row['email_type']];
     }
 
-    $selectQuery = "SELECT phone_number, phone_type FROM phone_numbers WHERE contact_id = :id";
+    $selectQuery = "SELECT phone_id, phone_number, phone_type FROM phone_numbers WHERE contact_id = :id";
     $statement = $connection->prepare($selectQuery);
     $statement->execute((array(":id" => $id)));
 
     while ($row = $statement->fetch()) {
-      $phoneInfo[] = ['phone' => $row['phone_number'], 'phoneType' => $row['phone_type']];
+      $phoneInfo[] = ['id' => $row['phone_id'], 'phone' => $row['phone_number'], 'phoneType' => $row['phone_type']];
     }
 
     $response = array_merge($response,array("emailData" => $emailInfo), array("phoneData" => $phoneInfo));
