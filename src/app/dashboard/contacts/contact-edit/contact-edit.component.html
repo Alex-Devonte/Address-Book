@@ -2,9 +2,6 @@
   <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
       <form (ngSubmit)="saveChanges(editContactForm)" #editContactForm="ngForm">
-        <div  *ngFor="let _email of contactData[0].emailInfo; let i = index;">
-          {{_email.email}}
-        </div>
         <div class="from-group">
           <input type="file" accept="image/*" class="form-control-file" id="profile-pic" name="profilePic" ngModel #profilePic="ngModel">
           <!-- <img id="preview" [src]="imageSrc || 'http://placehold.it/180'" alt="preview" /> -->
