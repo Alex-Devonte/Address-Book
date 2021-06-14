@@ -8,12 +8,7 @@
 
   try
   {
-    $selectQuery = "SELECT * FROM contacts 
-                    INNER JOIN email_addresses 
-                    ON contacts.contact_id = email_addresses.contact_id
-                    INNER JOIN phone_numbers
-                    ON contacts.contact_id = phone_numbers.contact_id
-                    WHERE user_id = :id";
+    $selectQuery = "SELECT * FROM contacts WHERE user_id = :id";
 
     $statement = $connection->prepare($selectQuery);
     $statement->execute(array(
