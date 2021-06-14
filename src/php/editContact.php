@@ -60,17 +60,18 @@
       ':id' => $id
     ));
 
-    $updateQuery = "UPDATE email_addresses
-                    SET email_type = :type, email_address = :email 
-                    WHERE contact_id = :id AND email_id = :email_id";
-    $statement = $connection->prepare($updateQuery);
+    $query = "INSERT INTO email_addresses (email_id, email_type, email_address, contact_id) VALUES (:email_id, :type, :email, :id) ON DUPLICATE KEY UPDATE email_type = :type, email_address = :email, contact_id = :id";
+    // $updateQuery = "UPDATE email_addresses
+    //                 SET email_type = :type, email_address = :email 
+    //                 WHERE contact_id = :id AND email_id = :email_id";
+    $statement = $connection->prepare($query);
 
     for ($i = 0; $i < count($emailGroup); $i++) {
       $statement->execute(array(
+        ':email_id' => $emailGroup[$i]['id'],
         ':type' => $emailGroup[$i]['emailType'],
         ':email' => $emailGroup[$i]['email'],
-        ':id' => $id,
-        ':email_id' => $emailGroup[$i]['id']
+        ':id' => $id
       ));
     }
     $updateQuery = "UPDATE phone_numbers
