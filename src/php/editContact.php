@@ -74,17 +74,19 @@
         ':id' => $id
       ));
     }
-    $updateQuery = "UPDATE phone_numbers
-                    SET phone_type = :type, phone_number = :phone
-                    WHERE contact_id = :id AND phone_id = :phone_id";
-    $statement = $connection->prepare($updateQuery);
+
+    $query = "INSERT INTO phone_numbers (phone_id, phone_type, phone_number, contact_id) VALUES (:phone_id, :type, :phone, :id) ON DUPLICATE KEY UPDATE phone_type = :type, phone_number = :phone, contact_id = :id";
+    // $updateQuery = "UPDATE phone_numbers
+    //                 SET phone_type = :type, phone_number = :phone
+    //                 WHERE contact_id = :id AND phone_id = :phone_id";
+    $statement = $connection->prepare($query);
 
     for ($i = 0; $i < count($phoneGroup); $i++) {
       $statement->execute(array(
+        ':phone_id' => $phoneGroup[$i]['id'],
         ':type' => $phoneGroup[$i]['phoneType'],
         ':phone' => $phoneGroup[$i]['phone'],
         ':id' => $id,
-        ':phone_id' => $phoneGroup[$i]['id']
       ));
     }
     
