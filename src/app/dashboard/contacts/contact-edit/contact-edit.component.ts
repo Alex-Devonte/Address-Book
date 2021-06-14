@@ -15,13 +15,13 @@ export class ContactEditComponent implements OnInit {
   contactData = [new Contact("","","","",[{id: "", email: "", emailType: ""}],[{id: "", phone: "", phoneType: ""}],"","")];
 
   emails = [{
-    id: '',
+    id: 0,
     email: '',
     emailType: ''
   }];
 
   phones = [{
-    id: '',
+    id: 0,
     phone: '',
     phoneType: ''
   }];
@@ -40,7 +40,7 @@ export class ContactEditComponent implements OnInit {
         //Populate arrays with data from database to fill out form inputs utilizing two-way binding
         for (let i = 0; i < this.contactData[0].emailInfo.length; i++) {
           this.emails.push({
-            id: this.contactData[0].emailInfo[i].id,
+            id: +this.contactData[0].emailInfo[i].id,
             email: this.contactData[0].emailInfo[i].email,
             emailType: this.contactData[0].emailInfo[i].emailType
           });
@@ -48,12 +48,28 @@ export class ContactEditComponent implements OnInit {
 
         for (let i = 0; i < this.contactData[0].phoneInfo.length; i++) {
           this.phones.push({
-            id: this.contactData[0].phoneInfo[i].id,
+            id: +this.contactData[0].phoneInfo[i].id,
             phone: this.contactData[0].phoneInfo[i].phone,
             phoneType: this.contactData[0].phoneInfo[i].phoneType
           });
         }                                 
       });
+    });
+  }
+
+  addEmailField() {
+    this.emails.push({
+      id: (this.emails.length + 2),
+      email: '',
+      emailType: ''
+    });
+  }
+
+  addPhoneField() {
+    this.phones.push({
+      id: (this.phones.length + 1),
+      phone: '',
+      phoneType: ''
     });
   }
 

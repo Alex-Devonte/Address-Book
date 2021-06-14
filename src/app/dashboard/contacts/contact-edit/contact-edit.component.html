@@ -27,6 +27,7 @@
           <label for="nickname">Nickname</label>
           <input type="text" class="form-control" id="nickname" name="nickname" ngModel #nickname="ngModel" [(ngModel)]="contactData[0].nickname">
         </div>
+        <button class="btn btn-primary" type="button" (click)="addEmailField()">Add Email</button>
         <div ngModelGroup="emailGroup" #emailGroup="ngModelGroup" *ngFor="let _email of emails;">
           <div class="form-group">
             <label for="email">Email</label>
@@ -44,6 +45,7 @@
             </select>
           </div>
         </div>
+        <button class="btn btn-primary" type="button" (click)="addPhoneField()">Add Phone</button>
         <div ngModelGroup="phoneGroup" #phoneGroup="ngModelGroup" *ngFor="let _phone of phones;">
           <div class="form-group">
             <label for="phone">Phone</label>
