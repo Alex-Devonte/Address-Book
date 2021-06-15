@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-10 col-sm-offset-1">
+    <div class="col-12 col-sm-12 col-md-6 offset-md-3">
       <form (ngSubmit)="onSubmit(registrationForm)" #registrationForm="ngForm">
         <div *ngIf="registrationError.length > 0" class="alert alert-danger">{{ registrationError }}</div>
         <div *ngIf="errorArr.length > 0" class="alert alert-danger">
@@ -8,29 +8,35 @@
             {{ err }}
           </p>
         </div>
-        <div class="form-group">
-          <label for="first-name">First Name</label>
-          <input type="text" class="form-control" id="first-name" name="firstName" required ngModel #firstName="ngModel" pattern="^[a-zA-Z]*$">
-          <div *ngIf="firstName.touched && !firstName.value" class="alert alert-danger">
-            First name is required
+        <h1>Registration</h1>
+        <p><span class="required-star">&#42;</span> Indicates a required field</p>
+        <div class="form-row">
+          <div class="form-group col-sm-6">
+            <label for="first-name"><span class="required-star">&#42;</span>First Name</label>
+            <input type="text" class="form-control" id="first-name" name="firstName" required ngModel #firstName="ngModel" pattern="^[a-zA-Z]*$">
+            <div *ngIf="firstName.touched && !firstName.value" class="alert alert-danger">
+              First name is required
+            </div>
+            <div *ngIf="firstName.touched && firstName.errors?.pattern" class="alert alert-danger">
+              First name should only include letters
+            </div>
           </div>
-          <div *ngIf="firstName.touched && firstName.errors?.pattern" class="alert alert-danger">
-            First name should only include letters
+          <div class="form-group col-sm-6">
+            <label for="last-name"><span class="required-star">&#42;</span>Last Name</label>
+            <input type="text" class="form-control" id="last-name" name="lastName" required ngModel #lastName="ngModel" pattern="^[a-zA-Z]*$">
+            <div *ngIf="lastName.touched && !lastName.value" class="alert alert-danger">
+              Last name is required
+            </div>
+            <div *ngIf="lastName.touched && lastName.errors?.pattern" class="alert alert-danger">
+              Last name should only include letters
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="last-name">Last Name</label>
-          <input type="text" class="form-control" id="last-name" name="lastName" required ngModel #lastName="ngModel" pattern="^[a-zA-Z]*$">
-          <div *ngIf="lastName.touched && !lastName.value" class="alert alert-danger">
-            Last name is required
-          </div>
-          <div *ngIf="lastName.touched && lastName.errors?.pattern" class="alert alert-danger">
-            Last name should only include letters
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
+        </div> <!--End Form Row-->
+       <div class="form-row">
+        <div class="form-group col-12">
+          <label for="email"><span class="required-star">&#42;</span>Email</label>
           <input type="email" class="form-control" id="email" name="email" (keyup)="checkEmail(registrationForm)"  required ngModel email #email="ngModel">
+          <p class="help-text">E.g: example@domain.com</p>
           <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
             Please enter a valid email address <span class="error-help">e.g: email@domain.com</span>
           </div>
@@ -38,10 +44,13 @@
             {{ error }}
           </div>
         </div>
-        <div ngModelGroup="passwordsGroup" #passwordsGroup="ngModelGroup" appConfirmPassword>
+       </div> <!--End Form Row-->
+       <div class="form-row">
+        <div class="col-12" ngModelGroup="passwordsGroup" #passwordsGroup="ngModelGroup" appConfirmPassword>
           <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password"><span class="required-star">&#42;</span>Password</label>
             <input type="password" class="form-control" id="password" name="password" required ngModel #password="ngModel" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}">
+            <p class="help-text">Password must be a minimum of 6 characters and contain at least 1 lowercase letter, 1 uppercase letter, and 1 number</p>
           </div>
           <div *ngIf="password.touched && password.errors?.pattern" class=" alert alert-danger">
             <ul>
@@ -52,16 +61,23 @@
             </ul>
           </div>
           <div class="form-group">
-            <label for="confirm-password">Confirm Password</label>
+            <label for="confirm-password"><span class="required-star">&#42;</span>Confirm Password</label>
             <input type="password" class="form-control" id="confirm-password" name="confirmPassword" required ngModel #confirmPassword="ngModel">
             <div *ngIf="confirmPassword.touched && passwordsGroup.errors?.mustMatch" class="alert alert-danger">
               Passwords do not match
             </div>
           </div>
         </div>
-        <button class="btn btn-primary" type="submit" [disabled]="registrationForm.invalid || emailExists">Register</button>
+       </div> <!--End Form Row-->
+       <div class="row">
+         <div class="col-sm-4">
+          <button class="btn btn-dark" id="register-btn" type="submit" [disabled]="registrationForm.invalid || emailExists">Register</button>
+         </div>
+         <div class="col-sm-8" style="display: flex;">
+          <a routerLink="/login" class="login-link">Already have an account? Login here.</a>
+         </div>
+       </div>
       </form>
-      <a routerLink="/login">Already have an account? Login here.</a>
-    </div>
-  </div>
-</div>
+    </div> <!--End Col-->
+  </div> <!--End Row-->
+</div> <!--End Container-->
