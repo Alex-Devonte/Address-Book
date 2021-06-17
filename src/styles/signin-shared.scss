@@ -1,0 +1,30 @@
+@import "styles";
+
+form {
+  background-color: $wild-blue-yonder;
+  border: 2px solid #000;
+  border-radius: 2%;
+  margin: 55px 15px 15px 15px;
+  padding: 35px;
+}
+
+label {
+  font-weight: bold;
+}
+
+
+input {
+  border: 1px solid $rich-black-fogra-29 !important;  
+}
+
+
+.login-link, .register-link {
+  align-self: center;
+  color: #0056b3;
+  font-style: italic;
+  font-weight: bold;
+
+  &:hover {
+    color: #007bff;
+  }
+}
