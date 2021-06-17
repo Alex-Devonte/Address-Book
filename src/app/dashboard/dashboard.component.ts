@@ -1,4 +1,5 @@
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ContactsService } from './contacts/contacts.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ContactsService } from './contacts/contacts.service';
 })
 export class DashboardComponent implements OnInit, AfterContentChecked {
 
-  constructor(private contactService: ContactsService) { }
+  constructor(private contactService: ContactsService, public router: Router) { }
 
   showForm = false;
   numOfContacts = this.contactService.contactList.length;
