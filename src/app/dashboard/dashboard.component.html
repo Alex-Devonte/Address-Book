@@ -4,7 +4,7 @@
       <app-contacts></app-contacts>
     </div>
     <div class="col-sm-10">
-      <div *ngIf="numOfContacts == 0" id="no-contacts-greeting">
+      <div *ngIf="numOfContacts == 0 && router.url != '/dashboard/add'" id="no-contacts-greeting">
         <h2>Looks like you currently have no contacts. Click the
         button below to add one!
         <br>
