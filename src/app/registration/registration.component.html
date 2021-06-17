@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 col-sm-12 col-md-6 offset-md-3">
+    <div class="col-12 col-sm-12 col-md-10 col-lg-7 mx-auto">
       <form (ngSubmit)="onSubmit(registrationForm)" #registrationForm="ngForm">
         <div *ngIf="registrationError.length > 0" class="alert alert-danger">{{ registrationError }}</div>
         <div *ngIf="errorArr.length > 0" class="alert alert-danger">
@@ -70,12 +70,14 @@
         </div>
        </div> <!--End Form Row-->
        <div class="row">
-         <div class="col-sm-4">
+         <div class="col-sm-12">
           <button class="btn btn-dark" id="register-btn" type="submit" [disabled]="registrationForm.invalid || emailExists">Register</button>
          </div>
-         <div class="col-sm-8" style="display: flex;">
+       </div>
+       <div class="row">
+        <div class="col-12" style="display: flex;">
           <a routerLink="/login" class="login-link">Already have an account? Login here.</a>
-         </div>
+        </div>
        </div>
       </form>
     </div> <!--End Col-->
