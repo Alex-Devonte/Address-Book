@@ -1,9 +1,5 @@
 @import "signin-shared";
 
-form {
-  margin: 55px 15px 15px 15px;
-}
-
 .error-help {
   font-style: italic;
   font-weight: bold;
@@ -18,12 +14,12 @@ form {
   font-style: italic;
 }
 
-@media only screen and (max-width: 600px) {
-  #register-btn {
-    width: 100%;
-  }
+#register-btn {
+  width: 100%;
+}
 
-  .login-link {
-    margin-top: 25px;
-  }
+.login-link {
+  margin-top: 25px;
+  text-align: center;
+  width: 100%;
 }
