@@ -1,6 +1,6 @@
 <div class="container float-left contact-list-container">
   <div class="search-container w-100">
-    <input type="search" class="form-control" placeholder="Search Contacts . . .">
+    <input type="search" class="form-control" placeholder="Search Contacts . . ." [disabled]="true" style="background-color: gray;">
   </div>
   <ul id="contact-list">
     <li *ngFor="let contact of contactList" class="contact">
