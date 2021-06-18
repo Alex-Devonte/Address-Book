@@ -1,9 +1,20 @@
 <div class="container-fluid h-100">
   <div class="row h-100">
-    <div class="col-sm-2 pl-0 pr-0">
-      <app-contacts></app-contacts>
+    <div class="col-2 pl-0 pr-0">
+      <app-contacts class="d-none d-sm-inline-block w-100"></app-contacts>
     </div>
-    <div class="col-sm-10">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark d-sm-none">
+      <a class="navbar-brand" href="#">Open List</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" 
+              data-target="#contact-hamburger" aria-controls="contact-hamburger"
+              aria-expanded="false" aria-label="Toggle Menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="contact-hamburger">
+        <app-contacts class="d-sm-none"></app-contacts>
+      </div>
+    </nav>
+    <div class="col-10">
       <div *ngIf="numOfContacts == 0 && router.url != '/dashboard/add'" id="no-contacts-greeting">
         <h2>Looks like you currently have no contacts. Click the
         button below to add one!
