@@ -11,6 +11,8 @@
   cursor: pointer;
 }
 
-col-sm-10 {
-  overflow-y: scroll;
+@media (max-width: 576px) { 
+  nav {
+    width: 100%;  
+  }
 }
