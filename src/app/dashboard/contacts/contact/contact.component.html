@@ -4,10 +4,11 @@
       <div class="header">
         <!-- <img id="contact-picture" src="{{ contact[0].path }}" alt="{{ contact[0].firstName }} Profile Picture"> -->
         <img id="contact-picture" src="../../../../assets/contact_placeholder.png" alt="{{ contact[0].firstName }} Profile Picture">
-        <h2 id="contact-name">{{ contact[0].firstName }} {{ contact[0].lastName }}</h2>
+        <h2 id="contact-name">{{ contact[0].firstName }} {{ contact[0].lastName }}</h2><br>
+        <h2 id="contact-nickname">({{ contact[0].nickname }})</h2>
         <div class="modify-links">
-          <a routerLink="../edit/{{ contact[0].id }}">Edit Contact</a>
-          <a (click)="openModal(content)">Delete Contact</a>
+          <a routerLink="../edit/{{ contact[0].id }}" class="edit-link">Edit Contact</a>
+          <a (click)="openModal(content)" class="delete-link">Delete Contact</a>
         </div>   
       </div>
       <!--Delete Confirmation Modal-->
@@ -29,19 +30,29 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-6 phone-section section"> 
-      <h2>Phone Info</h2>
-      <div *ngFor="let phone of contact[0].phoneInfo;">
-        {{ phone.phone }}
-        <p class="contact-type">{{ phone.phoneType }}</p>
+    <section class="col-6 phone-section"> 
+      <h2>Phone</h2>
+      <hr>
+      <div class="row" *ngFor="let phone of contact[0].phoneInfo;">
+        <div class="col-7">
+          <p class="phone">{{ phone.phone }}</p>
+        </div>
+        <div class="col-5">
+          <p class="contact-type">{{ phone.phoneType }}</p>
+        </div>
       </div>
-    </div>
-    <div class="col-6 email-section section">
-      <h2>Email Info</h2>
-      <div *ngFor="let email of contact[0].emailInfo">
-        {{ email.email }}
-        <p class="contact-type">{{ email.emailType }}</p>
+    </section>
+    <section class="col-6 email-section">
+      <h2>Email</h2>
+      <hr>
+      <div class="row" *ngFor="let email of contact[0].emailInfo;">
+        <div class="col-7">
+          <a href="//{{ email.email }}" target="_blank" class="email">{{ email.email }}</a>
+        </div>
+        <div class="col-5">
+          <p class="contact-type" type="email">{{ email.emailType }}</p>
+        </div>
       </div>
-    </div>
+    </section>
   </div>
 </div>
