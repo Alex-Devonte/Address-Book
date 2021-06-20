@@ -15,8 +15,8 @@ $text-color-primary: $rich-black-fogra-29;
 }
 
 .contact-list-container {
-  background-color: $slate-gray;
-  border: 1px solid #000;
+  background-color: $rich-black-fogra-29;
+  border: 1px solid $rich-black-fogra-29;
   border-left: none;
   border-top: none;
   height: 100vh;
@@ -30,6 +30,7 @@ $text-color-primary: $rich-black-fogra-29;
 }
 
 #contact-list {
+  background-color: $slate-gray;
   border-bottom: 2px solid #000;
   border-top: 2px solid #000;
   height: 85%;
@@ -68,13 +69,16 @@ $text-color-primary: $rich-black-fogra-29;
 
   &:hover {
     @include transition(background-color .2s ease);
-    background-color: gray;
+    background-color: $dutch-white;
+    color: $rich-black-fogra-29;
+    text-decoration: none;
   }
 }
 
 #contact-count-container {
-  background-color: #000;
+  background-color: $rich-black-fogra-29;
   color: #fff;
+  padding: 10px;
 
   p {
     margin: 0;
