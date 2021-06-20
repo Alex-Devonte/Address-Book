@@ -5,8 +5,9 @@ div {
 }
 
 .header {
-  background-color: $china-rose;
-  border-bottom: 5px solid #000;
+  background-color: $rich-black-fogra-29;
+  color: #fff;
+  border: 5px solid #000;
   padding: 25px;
   text-align: center;
 
@@ -26,7 +27,6 @@ div {
     padding: 5px;
   
     a {
-      color: #fff;
       font-size: 18px;
       margin: 10px;
 
@@ -37,22 +37,62 @@ div {
     }
   }
 }
+.edit-link {
+  color: $wild-blue-yonder;
 
-.section h2 {
-  font-size: 25px;
+  &:hover {
+    @include transition (background-color .4s ease);
+    background-color: $wild-blue-yonder;
+    border: 2px solid #fff;
+    color: $rich-black-fogra-29
+  }
 }
 
-.phone-section {
+.delete-link {
+  color: $china-rose;
 
+  &:hover {
+    @include transition (background-color .4s ease);
+    background-color: $china-rose;
+    border: 2px solid #fff;
+    color: $rich-black-fogra-29;
+  }
+}
+
+.edit-link, .delete-link {
+  border: 2px solid;
+  padding: 10px;
+}
+
+
+section {
+  text-align: center;
+
+  h2 {
+    color: $rich-black-fogra-29;
+    font-size: 32px;
+    margin: 30px 0 10px 0 ;
+  }
+
+  hr {
+    border-color: $slate-gray;
+  }
+}
+
+.phone, .email   {
+  color: $rich-black-fogra-29;
+  font-size: 20px;
+}
+
+.email:hover {
+  color: $china-rose;
 }
 
 .contact-type {
   color: $slate-gray;
+  font-size: 20px;
   font-style: italic;
-}
-
-.email-section {
-
+  text-align: left;
 }
 
 
