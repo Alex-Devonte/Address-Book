@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group col-5">
+          <div class="form-group col-4">
             <label for="first-name">First Name*</label>
             <input type="text" class="form-control" id="first-name" name="firstName" required ngModel #firstName="ngModel" pattern="^[a-zA-Z]*$">
             <div *ngIf="firstName.touched && !firstName.value" class="alert alert-danger">
@@ -22,16 +22,14 @@
               First name should only include letters
             </div>
           </div>
-          <div class="form-group col-5">
+          <div class="form-group col-4">
             <label for="last-name">Last Name</label>
             <input type="text" class="form-control" id="last-name" name="lastName" ngModel #lastName="ngModel" pattern="^[a-zA-Z]*$">
             <div *ngIf="lastName.touched && lastName.errors?.pattern" class="alert alert-danger">
               Last name should only include letters
             </div>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-5">
+          <div class="form-group col-4">
             <label for="nickname">Nickname</label>
             <input type="text" class="form-control" id="nickname" name="nickname" ngModel #nickname="ngModel">
           </div>
