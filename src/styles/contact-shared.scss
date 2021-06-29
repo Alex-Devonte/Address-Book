@@ -49,3 +49,19 @@ form {
 .add-field-text {
   font-style: italic;  
 }
+
+@media (min-width: 320px) { 
+  form {
+    margin-bottom: 10px;
+  }
+  
+  .add-field-container {
+    .add-btn-circle {
+      font-size: 24px;
+    }
+  }
+
+  button {
+    width: 100%;
+  }
+}
