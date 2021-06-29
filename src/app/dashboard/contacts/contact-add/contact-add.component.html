@@ -1,12 +1,12 @@
 <div class="container-fluid" >
   <div class="row">
-    <div class="col-12 col-lg-10 offset-lg-1">
+    <div class="col-12 col-sm-12 col-lg-10 offset-lg-1">
       <div class="form-title">
         <h2>Add Contact</h2>
       </div>
       <form (ngSubmit)="onSubmit(addContactForm)" #addContactForm="ngForm">
         <div class="form-row">
-          <div class="form-group">
+          <div class="form-group mx-auto col-sm-6 offset-sm-3">
             <img id="preview" [src]="imageSrc || 'http://placehold.it/180'" alt="preview" />
             <input type="file" accept="image/*" class="form-control-file" id="profile-pic" name="profilePic" ngModel #profilePic="ngModel" (change)="showPreview($event)"> 
           </div>
