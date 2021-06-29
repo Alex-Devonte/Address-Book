@@ -13,6 +13,7 @@ export class ContactEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService) { }
   contactData = [new Contact("","","","",[{id: "", email: "", emailType: ""}],[{id: "", phone: "", phoneType: ""}],"","")];
+  imageSrc: any;
 
   emails = [{
     id: 0,
@@ -56,6 +57,18 @@ export class ContactEditComponent implements OnInit {
       });
     });
   }
+
+  //Access FileList form the File API to show a preview of the user's uploaded image
+  showPreview(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onload = e => this.imageSrc = reader.result;
+
+      reader.readAsDataURL(file);
+    }
+  } 
 
   addEmailField() {
     this.emails.push({
