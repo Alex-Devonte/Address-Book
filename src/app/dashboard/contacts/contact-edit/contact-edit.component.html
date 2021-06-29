@@ -42,9 +42,9 @@
             <div class="form-group">
               <label for="email">Email</label>
               <input type="email" class="form-control" id="email" name="email{{_email.id}}" ngModel email #email="ngModel"  [(ngModel)]="_email.email">
-              <!-- <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+              <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
                 Please enter a valid email address <span class="error-help">e.g: email@domain.com</span>
-              </div> -->
+              </div>
             </div>
             <div class="form-group">
               <select class="form-control" id="email-type" name="emailType{{_email.id}}" ngModel #emailType="ngModel"  [(ngModel)]="_email.emailType">
@@ -65,9 +65,9 @@
             <div class="form-group">
               <label for="phone">Phone</label>
               <input type="tel" class="form-control" id="phone" name="phone{{_phone.id}}" ngModel #phone="ngModel" pattern="^\d{10}$"  [(ngModel)]="_phone.phone">
-              <!-- <div *ngIf="phone.touched && phone.invalid" class="alert alert-danger">
+              <div *ngIf="phone.touched && phone.invalid" class="alert alert-danger">
                 Phone numbers must be 10 digits long and contain only numbers 
-              </div> -->
+              </div>
             </div>
             <div class="form-group">
               <select class="form-control" id="phone-type" name="phoneType{{_phone.id}}" ngModel #phoneType="ngModel"  [(ngModel)]="_phone.phoneType">
