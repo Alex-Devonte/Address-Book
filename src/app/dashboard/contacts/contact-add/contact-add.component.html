@@ -34,7 +34,10 @@
             <input type="text" class="form-control" id="nickname" name="nickname" ngModel #nickname="ngModel">
           </div>
         </div>
-        <button class="btn btn-primary" type="button" (click)="addEmailField()">Add Email</button>
+        <div class="add-field-container">
+          <mat-icon class="add-btn-circle" (click)="addEmailField()">add_circle</mat-icon>
+          <p class="add-field-text">Add email</p>
+        </div>
         <div class="form-row">
           <div class="col-4" ngModelGroup="emailGroup" #emailGroup="ngModelGroup" *ngFor="let _email of emails; let i = index;">
             <div class="form-group">
@@ -54,7 +57,10 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-primary" type="button" (click)="addPhoneField()">Add Phone</button>
+        <div class="add-field-container">
+          <mat-icon class="add-btn-circle" (click)="addPhoneField()">add_circle</mat-icon>
+          <p class="add-field-text">Add phone</p>   
+        </div>
         <div class="form-row">
           <div class="col-4" ngModelGroup="phoneGroup" #phoneGroup="ngModelGroup" *ngFor="let _phone of phones; let i = index;">
             <div class="form-group">
