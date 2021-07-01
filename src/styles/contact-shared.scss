@@ -23,7 +23,9 @@ form {
 }
 
 #preview {
-  margin-top: 25px;
+  display: block;
+  margin: 25px auto;
+  width: 180px;
 }
 
 .add-field-container {
@@ -52,10 +54,6 @@ form {
 @media (max-width: 576px) { 
   form {
     margin-bottom: 10px;
-  }
-
-  #preview {
-    width: 100%;
   }
 
   .add-field-container {
