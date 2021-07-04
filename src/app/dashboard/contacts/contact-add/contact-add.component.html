@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group col-12 col-lg-4">
+          <div class="form-group col-12 col-md-4 col-lg-4">
             <label for="first-name">First Name*</label>
             <input type="text" class="form-control" id="first-name" name="firstName" required ngModel #firstName="ngModel" pattern="^[a-zA-Z]*$">
             <div *ngIf="firstName.touched && !firstName.value" class="alert alert-danger">
@@ -22,14 +22,14 @@
               First name should only include letters
             </div>
           </div>
-          <div class="form-group col-12 col-lg-4">
+          <div class="form-group col-12 col-md-4 col-lg-4">
             <label for="last-name">Last Name</label>
             <input type="text" class="form-control" id="last-name" name="lastName" ngModel #lastName="ngModel" pattern="^[a-zA-Z]*$">
             <div *ngIf="lastName.touched && lastName.errors?.pattern" class="alert alert-danger">
               Last name should only include letters
             </div>
           </div>
-          <div class="form-group col-12 col-lg-4">
+          <div class="form-group col-12 col-md-4 col-lg-4">
             <label for="nickname">Nickname</label>
             <input type="text" class="form-control" id="nickname" name="nickname" ngModel #nickname="ngModel">
           </div>
@@ -39,7 +39,7 @@
           <p class="add-field-text">Add email</p>
         </div>
         <div class="form-row">
-          <div class="col-12 col-lg-4" ngModelGroup="emailGroup" #emailGroup="ngModelGroup" *ngFor="let _email of emails; let i = index;">
+          <div class="col-12 col-md-6 col-lg-4" ngModelGroup="emailGroup" #emailGroup="ngModelGroup" *ngFor="let _email of emails; let i = index;">
             <div class="form-group">
               <label for="email">Email</label>
               <input type="email" class="form-control" id="email" name="email{{_email.id}}" [(ngModel)]="_email.email" email #email="ngModel">
@@ -62,7 +62,7 @@
           <p class="add-field-text">Add phone</p>   
         </div>
         <div class="form-row">
-          <div class="col-12 col-lg-4" ngModelGroup="phoneGroup" #phoneGroup="ngModelGroup" *ngFor="let _phone of phones; let i = index;">
+          <div class="col-12 col-md-6 col-lg-4" ngModelGroup="phoneGroup" #phoneGroup="ngModelGroup" *ngFor="let _phone of phones; let i = index;">
             <div class="form-group">
               <label for="phone">Phone</label>
               <input type="tel" class="form-control" id="phone" name="phone{{_phone.id}}" [(ngModel)]="_phone.phone" #phone="ngModel" pattern="^\d{10}$">
