@@ -10,7 +10,7 @@ form {
   background-color: $wild-blue-yonder;
   border: 3px solid $rich-black-fogra-29;
   border-radius: 2%;
-  margin-top: 50px;
+  margin-top: 25px;
   padding: 35px;  
 
   input:not(#profile-pic), select {
@@ -64,5 +64,12 @@ form {
 
   button {
     width: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .add-btn-circle {
+    font-size: 24px;
+    margin: 0;
   }
 }
