@@ -95,6 +95,43 @@ section {
   text-align: left;
 }
 
+@media (max-width: 576px) {
+  .header {
+    padding: 0;
+  }
 
+  #contact-picture  {
+    margin: 25px !important;
+  }
+  
+  .modify-links {
+    padding: 0;
+    width: 100% !important;
+    
+    a {
+      display: block;
+    }
+  }
+  .email-section, .phone-section {
+    text-align: left;
+  }
+}
 
+@media (max-width: 768px) {
+  .email-section, .phone-section {
+    text-align: center !important;
 
+    h2, p {
+      text-align: center;
+    }
+  }
+
+  .modify-links {
+    margin: 0 auto;
+    width: 50%;
+
+    a {
+      display: block;
+    }
+  }
+}
