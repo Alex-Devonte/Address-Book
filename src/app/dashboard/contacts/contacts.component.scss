@@ -96,3 +96,10 @@ $text-color-primary: $rich-black-fogra-29;
     height: 100vh;
   }
 }
+
+@media (max-width: 576px) {
+  #contact-list {
+    height: 75%;
+    width: 100%;
+  }
+}
