@@ -34,10 +34,10 @@
       <h2>Phone</h2>
       <hr>
       <div class="row" *ngFor="let phone of contact[0].phoneInfo;">
-        <div class="col-8 col-sm-6 col-md-8 col-lg-9">
+        <div class="col-6 col-lg-9">
           <p class="phone">{{ phone.phone }}</p>
         </div>
-        <div class="col-4 col-sm-6 col-md-4 col-lg-3">
+        <div class="col-6 col-lg-3">
           <p class="contact-type">{{ phone.phoneType }}</p>
         </div>
       </div>
@@ -46,10 +46,10 @@
       <h2>Email</h2>
       <hr>
       <div class="row" *ngFor="let email of contact[0].emailInfo;">
-        <div class="col-8 col-sm-6 col-md-8 col-lg-9">
+        <div class="col-6 col-lg-9">
           <a href="//{{ email.email }}" target="_blank" class="email">{{ email.email }}</a>
         </div>
-        <div class="col-4 col-sm-6 col-md-4 col-lg-3">
+        <div class="col-6 col-lg-3">
           <p class="contact-type" type="email">{{ email.emailType }}</p>
         </div>
       </div>
