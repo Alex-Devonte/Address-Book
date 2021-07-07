@@ -4,7 +4,7 @@
   </div>
   <ul id="contact-list">
     <li *ngFor="let contact of contactList" class="contact">
-    <a routerLink="contact/{{contact.id}}" class="contact-link">
+    <a routerLink="contact/{{contact.id}}" class="contact-link" data-toggle="collapse" data-target=".navbar-collapse.show">
       <img class="profile-pic-thumb" src="../../assets/contact_placeholder.png">
       {{ contact.firstName }} {{ contact.lastName }}
     </a>
