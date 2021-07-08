@@ -21,6 +21,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { ContactAddComponent } from './dashboard/contacts/contact-add/contact-add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
-    NgbModule
+    NgbModule,
+    FileUploadModule
   ],
   providers: [],
   bootstrap: [AppComponent]
