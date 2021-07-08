@@ -3,7 +3,17 @@
   require_once("db_connect.php");
   require_once("validationFunctions.php");
   header("Access-Control-Allow-Origin: *");
-  header("Access-Control-Allow-Headers: Content-Type");
+  header('Access-Control-Allow-Methods: POST');
+  header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+
+  if (isset($_FILES['attachment'])) {
+    //Set directory
+    $target_dir = "images/";
+    //Set path
+    $target_file = $target_dir . basename($_FILES['attachment']['name']);
+    move_uploaded_file($_FILES['attachment']['tmp_name'], $target_file);
+    exit;
+  } 
 
   $data = json_decode(file_get_contents("php://input"), true);
   $data = (array)$data;
@@ -20,7 +30,6 @@
   $phoneGroup = $contactData['phoneGroup'];
   
   $profilePicSrc = $contactData['profilePic'];
-
   $emailCount = count($emailGroup);
   $phoneCount = count($phoneGroup);
   
@@ -39,6 +48,7 @@
   }
 
   if (count($errors) == 0) {
+    // move_uploaded_file($profilePicSrc,)
     try 
     {
       //Insert for contacts table
