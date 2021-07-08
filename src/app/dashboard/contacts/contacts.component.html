@@ -5,7 +5,10 @@
   <ul id="contact-list">
     <li *ngFor="let contact of contactList" class="contact">
     <a routerLink="contact/{{contact.id}}" class="contact-link" data-toggle="collapse" data-target=".navbar-collapse.show">
-      <img class="profile-pic-thumb" src="../../assets/contact_placeholder.png">
+      <img *ngIf="contact.path == '' else content" class="profile-pic-thumb" src="../../assets/contact_placeholder.png">
+      <ng-template #content>
+        <img class="profile-pic-thumb" src="{{ contact.path }}">
+      </ng-template>
       {{ contact.firstName }} {{ contact.lastName }}
     </a>
     </li>
