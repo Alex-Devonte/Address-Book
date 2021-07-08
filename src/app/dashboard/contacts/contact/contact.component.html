@@ -2,8 +2,10 @@
   <div class="row">
     <div class="col-12 px-0" id="contact-card">
       <div class="header">
-        <!-- <img id="contact-picture" src="{{ contact[0].path }}" alt="{{ contact[0].firstName }} Profile Picture"> -->
-        <img id="contact-picture" src="../../../../assets/contact_placeholder.png" alt="{{ contact[0].firstName }} Profile Picture">
+        <img *ngIf="contact[0].path == '' else content" id="contact-picture" src="../../../../assets/contact_placeholder.png">
+        <ng-template #content>
+          <img id="contact-picture" src="{{ contact[0].path }}">
+        </ng-template>
         <h2 id="contact-name">{{ contact[0].firstName }} {{ contact[0].lastName }}</h2><br>
         <h2 id="contact-nickname">({{ contact[0].nickname }})</h2>
         <div class="modify-links">
