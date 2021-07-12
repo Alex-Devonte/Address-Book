@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/token-storage.service';
 import { ContactsService } from '../../contacts/contacts.service';
-import { FileUploader, FileLikeObject, FileItem } from 'ng2-file-upload';
+import { FileUploader, FileItem, ParsedResponseHeaders } from 'ng2-file-upload';
 
 
 @Component({
@@ -13,8 +13,9 @@ import { FileUploader, FileLikeObject, FileItem } from 'ng2-file-upload';
 })
 export class ContactAddComponent implements OnInit {
   imageSrc: any;
-  url = "http://localhost/address-book/src/php/addContact.php";
+  url = "http://localhost/address-book/src/php/upload.php";
   myFile: any;
+  attachmentData: any;
 
   constructor(private router: Router, private contactService: ContactsService, private tokenStorage: TokenStorageService) { }
 
@@ -29,15 +30,6 @@ export class ContactAddComponent implements OnInit {
     phone: '',
     phoneType: ''     
   }];
-
-  //ng2-File-Upload
-  public uploader: FileUploader = new FileUploader({
-    url: this.url,
-    disableMultipart: false,
-    autoUpload: true,
-    itemAlias: 'attachment'
-  });
-
 
   ngOnInit(): void {
     this.uploader.onBeforeUploadItem = (item) => {
@@ -60,7 +52,25 @@ export class ContactAddComponent implements OnInit {
   onFileSelected(event: File[]) {
    const file: File = event[0];
    this.myFile = file;
+
+   this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
   }
+
+  //ng2-File-Upload
+  public uploader: FileUploader = new FileUploader({
+    url: this.url,
+    disableMultipart: false,
+    autoUpload: true,
+    itemAlias: 'attachment',
+    additionalParameter: {folder_id: this.tokenStorage.getToken().id}
+  });
+
+  onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
+    //success server response
+    let data = JSON.parse(response); 
+    this.attachmentData = data;
+  }
+  
 
   addEmailField() {
     this.emails.push({
@@ -83,10 +93,8 @@ export class ContactAddComponent implements OnInit {
     contactData.emailGroup = this.emails;
     contactData.phoneGroup = this.phones;
 
-    //Only set the picture location if one was uploaded
-    if (this.uploader.isFile(this.myFile)) {
-      contactData.profilePic = "http://localhost/address-book/src/php/images/" + this.myFile.name;
-    }
+    //Add attachment property to the form data to be sent to the server
+    contactData.attachment = this.attachmentData;
 
     this.contactService.addContact(this.tokenStorage.getToken().id, contactData).subscribe(res => {
       this.contactService.refreshContactList();

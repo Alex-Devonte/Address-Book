@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Contact } from 'src/app/shared/models/contact-model';
 import { ContactsService } from '../contacts.service';
+import { FileUploader, FileItem, ParsedResponseHeaders } from 'ng2-file-upload';
+import { TokenStorageService } from 'src/app/token-storage.service';
 
 @Component({
   selector: 'app-contact-edit',
@@ -11,9 +13,13 @@ import { ContactsService } from '../contacts.service';
 })
 export class ContactEditComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService, private tokenStorage: TokenStorageService) { }
+
   contactData = [new Contact("","","","",[{id: "", email: "", emailType: ""}],[{id: "", phone: "", phoneType: ""}],"","")];
   imageSrc: any;
+  url = "http://localhost/address-book/src/php/upload.php";
+  myFile: any;
+  attachmentData: any;
 
   emails = [{
     id: 0,
@@ -28,6 +34,10 @@ export class ContactEditComponent implements OnInit {
   }];
 
   ngOnInit(): void {
+    this.uploader.onBeforeUploadItem = (item) => {
+      item.withCredentials = false;
+    }
+
     this.emails.pop();
     this.phones.pop();
 
@@ -68,7 +78,29 @@ export class ContactEditComponent implements OnInit {
 
       reader.readAsDataURL(file);
     }
-  } 
+  }
+  
+  onFileSelected(event: File[]) {
+    const file: File = event[0];
+    this.myFile = file;
+ 
+    this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
+   }
+ 
+   //ng2-File-Upload
+   public uploader: FileUploader = new FileUploader({
+     url: this.url,
+     disableMultipart: false,
+     autoUpload: true,
+     itemAlias: 'attachment',
+     additionalParameter: {folder_id: this.tokenStorage.getToken().id}
+   });
+ 
+   onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
+     //success server response
+     let data = JSON.parse(response); 
+     this.attachmentData = data;
+   }
 
   addEmailField() {
     this.emails.push({
@@ -91,6 +123,9 @@ export class ContactEditComponent implements OnInit {
 
     formData.emailGroup = this.emails;
     formData.phoneGroup = this.phones;
+
+    //Add attachment property to the form data to be sent to the server
+    formData.attachment = this.attachmentData;
 
     this.contactService.editContact(this.contactData[0].id, formData).subscribe((res: any) => {
       if (!res.hasErrors) {
