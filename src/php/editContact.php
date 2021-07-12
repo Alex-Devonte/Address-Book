@@ -19,6 +19,7 @@
 
   $emailGroup = $data['emailGroup'];
   $phoneGroup = $data['phoneGroup'];
+  $attachment = $data['attachment'];
 
   if (validateName($dataKeys[1], $data['firstName'], $errors) && validateName($dataKeys[2], $data['lastName'], $errors)) {
     $firstName = $data['firstName'];
@@ -43,6 +44,17 @@
       echo json_encode($response);
       exit();
     }
+
+    $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/address-book/src/php/images/" . $id;
+
+    //Create folder for image based on user_id if it doesn't exist
+    if (!file_exists($target_dir)) {
+      mkdir($target_dir, 0777, true);
+    } 
+    $target_file = $target_dir . '/' . basename($attachment['attachment']['name']);
+
+    //https://www.php.net/manual/en/function.rename.php
+    rename($attachment['tmp_path'], $target_file);
     
     $updateQuery = "UPDATE contacts
                     SET first_name = :first, last_name = :last, nickname = :nickname,
@@ -56,7 +68,7 @@
       ':first' => $firstName,
       ':last' => $lastName,
       ':nickname' => $nickname,
-      ':path' => $path,
+      ':path' => "http://localhost/address-book/src/php/images/" . $id . '/' . $attachment['attachment']['name'],
       ':id' => $id
     ));
 

@@ -6,15 +6,6 @@
   header('Access-Control-Allow-Methods: POST');
   header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
-  if (isset($_FILES['attachment'])) {
-    //Set directory
-    $target_dir = "images/";
-    //Set path
-    $target_file = $target_dir . basename($_FILES['attachment']['name']);
-    move_uploaded_file($_FILES['attachment']['tmp_name'], $target_file);
-    exit;
-  } 
-
   $data = json_decode(file_get_contents("php://input"), true);
   $data = (array)$data;
 
@@ -32,7 +23,8 @@
   $profilePicSrc = $contactData['profilePic'];
   $emailCount = count($emailGroup);
   $phoneCount = count($phoneGroup);
-  
+  $attachment = $contactData['attachment'];
+
   for ($i = 0; $i < $emailCount; $i++) {
     $email = $emailGroup[$i]['email'];
     if (!empty($email)) {
@@ -48,7 +40,17 @@
   }
 
   if (count($errors) == 0) {
-    // move_uploaded_file($profilePicSrc,)
+    $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/address-book/src/php/images/" . $userId;
+    //$target_dir = "http://localhost/address-book/src/php/images/" . $userId;
+
+    //Create folder for image based on user_id if it doesn't exist
+    if (!file_exists($target_dir)) {
+      mkdir($target_dir, 0777, true);
+    } 
+    $target_file = $target_dir . '/' . basename($attachment['attachment']['name']);
+
+    //https://www.php.net/manual/en/function.rename.php
+    rename($attachment['tmp_path'], $target_file);
     try 
     {
       //Insert for contacts table
@@ -60,7 +62,7 @@
         "first_name" => $firstName,
         "last_name" => $lastName,
         "nickname" => $nickname,
-        "pic_path" => $profilePicSrc,
+        "pic_path" => "http://localhost/address-book/src/php/images/" . $userId . '/' . $attachment['attachment']['name'],
         "id" => $userId
       ));    
       $contactId = $connection->lastInsertId();
