@@ -82,7 +82,23 @@
           </div>
         </div>
         <button class="btn btn-primary" type="submit" [disabled]="editContactForm.invalid">Save Changes</button>
-        <button class="btn btn-secondary" type="button" >Discard Changes</button>
+        <button class="btn btn-secondary" type="button" (click)="openModal(content)">Discard Changes</button>
+         <!--Discard Changes Modal-->
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h3 class="modal-title">Delete Confirmation</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close('Closed with X')">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you wish to discard changes?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="discardChanges()">Yes, discard changes.</button>
+            <button type="button" class="btn btn-secondary" (click)="modal.close('Closed with cancel button')">No, don't discard.</button>
+          </div>
+        </ng-template>
       </form>
     </div>
   </div>
