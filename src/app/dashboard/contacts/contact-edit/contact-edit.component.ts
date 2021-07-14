@@ -5,6 +5,7 @@ import { Contact } from 'src/app/shared/models/contact-model';
 import { ContactsService } from '../contacts.service';
 import { FileUploader, FileItem, ParsedResponseHeaders } from 'ng2-file-upload';
 import { TokenStorageService } from 'src/app/token-storage.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-contact-edit',
@@ -13,13 +14,15 @@ import { TokenStorageService } from 'src/app/token-storage.service';
 })
 export class ContactEditComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService, private tokenStorage: TokenStorageService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService, private tokenStorage: TokenStorageService, private modal: NgbModal) { }
 
   contactData = [new Contact("","","","",[{id: "", email: "", emailType: ""}],[{id: "", phone: "", phoneType: ""}],"","")];
   imageSrc: any;
   url = "http://localhost/address-book/src/php/upload.php";
   myFile: any;
   attachmentData: any;
+
+  modalRef: any;
 
   emails = [{
     id: 0,
@@ -118,6 +121,10 @@ export class ContactEditComponent implements OnInit {
     });
   }
 
+  openModal(content: any) {
+    this.modalRef = this.modal.open(content);
+  }
+
   saveChanges(form: NgForm) {
     const formData = form.value;
 
@@ -133,5 +140,10 @@ export class ContactEditComponent implements OnInit {
         this.router.navigate(["dashboard"]);
       }
     });
+  }
+
+  discardChanges() {
+    this.modalRef.close();
+    this.router.navigate(["/dashboard"]);
   }
 }
