@@ -23,7 +23,6 @@
   $profilePicSrc = $contactData['profilePic'];
   $emailCount = count($emailGroup);
   $phoneCount = count($phoneGroup);
-  $attachment = $contactData['attachment'];
 
   for ($i = 0; $i < $emailCount; $i++) {
     $email = $emailGroup[$i]['email'];
@@ -40,17 +39,22 @@
   }
 
   if (count($errors) == 0) {
-    $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/address-book/src/php/images/" . $userId;
-    //$target_dir = "http://localhost/address-book/src/php/images/" . $userId;
+    if (isset($contactData['attachment'])) {
+      $attachment = $contactData['attachment'];
 
-    //Create folder for image based on user_id if it doesn't exist
-    if (!file_exists($target_dir)) {
-      mkdir($target_dir, 0777, true);
-    } 
-    $target_file = $target_dir . '/' . basename($attachment['attachment']['name']);
-
-    //https://www.php.net/manual/en/function.rename.php
-    rename($attachment['tmp_path'], $target_file);
+      $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/address-book/src/php/images/" . $userId;
+      //$target_dir = "http://localhost/address-book/src/php/images/" . $userId;
+  
+      //Create folder for image based on user_id if it doesn't exist
+      if (!file_exists($target_dir)) {
+        mkdir($target_dir, 0777, true);
+      } 
+      $target_file = $target_dir . '/' . basename($attachment['attachment']['name']);
+  
+      //https://www.php.net/manual/en/function.rename.php
+      rename($attachment['tmp_path'], $target_file);
+      $profilePicSrc = "http://localhost/address-book/src/php/images/" . $userId . '/' . $attachment['attachment']['name'];
+    }
     try 
     {
       //Insert for contacts table
@@ -62,7 +66,7 @@
         "first_name" => $firstName,
         "last_name" => $lastName,
         "nickname" => $nickname,
-        "pic_path" => "http://localhost/address-book/src/php/images/" . $userId . '/' . $attachment['attachment']['name'],
+        "pic_path" => $profilePicSrc,
         "id" => $userId
       ));    
       $contactId = $connection->lastInsertId();
