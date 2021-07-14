@@ -47,6 +47,7 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+/src/php/images
 
 # System Files
 .DS_Store
