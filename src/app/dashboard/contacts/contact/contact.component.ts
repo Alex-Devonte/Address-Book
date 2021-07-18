@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Contact } from 'src/app/shared/models/contact-model';
 import { ContactsService } from '../contacts.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-contact',
@@ -16,6 +17,7 @@ export class ContactComponent implements OnInit {
   contact = [new Contact("","","","",[{id: "", email: "", emailType: ""}],[{id: "", phone: "", phoneType: ""}],"","")];
   @Output() close: EventEmitter<any> = new EventEmitter();
   modalRef: any;
+  placeholderSrc = environment.placeholderSrc;
 
   ngOnInit(): void {
     //Allows ngOnInit to be called every time route changes instead of just once when component is created

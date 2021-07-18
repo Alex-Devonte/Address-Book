@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Contact } from 'src/app/shared/models/contact-model';
 import { TokenStorageService } from '../../token-storage.service';
 import { ContactsService } from './contacts.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-contacts',
@@ -14,6 +15,7 @@ export class ContactsComponent implements OnInit {
 
   userId = this.tokenStorage.getToken().id;
   numberOfContacts = 0;
+  placeholderSrc = environment.placeholderSrc;
 
   constructor(private contactService: ContactsService, private tokenStorage: TokenStorageService) {
     this.contactService.refreshList$.subscribe(() => {
