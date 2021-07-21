@@ -6,6 +6,7 @@ import { ContactsService } from '../contacts.service';
 import { FileUploader, FileItem, ParsedResponseHeaders } from 'ng2-file-upload';
 import { TokenStorageService } from 'src/app/token-storage.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-contact-edit',
@@ -18,7 +19,7 @@ export class ContactEditComponent implements OnInit {
 
   contactData = [new Contact("","","","",[{id: "", email: "", emailType: ""}],[{id: "", phone: "", phoneType: ""}],"","")];
   imageSrc: any;
-  url = "http://localhost/address-book/src/php/upload.php";
+  url = environment.uploadUrl;
   myFile: any;
   attachmentData: any;
 

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/token-storage.service';
 import { ContactsService } from '../../contacts/contacts.service';
 import { FileUploader, FileItem, ParsedResponseHeaders } from 'ng2-file-upload';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { FileUploader, FileItem, ParsedResponseHeaders } from 'ng2-file-upload';
 })
 export class ContactAddComponent implements OnInit {
   imageSrc: any;
-  url = "http://localhost/address-book/src/php/upload.php";
+  url = environment.uploadUrl;
   myFile: any;
   attachmentData: any;
 
