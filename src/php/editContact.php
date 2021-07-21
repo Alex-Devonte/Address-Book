@@ -20,9 +20,13 @@
   $emailGroup = $data['emailGroup'];
   $phoneGroup = $data['phoneGroup'];
 
-  if (validateName($dataKeys[1], $data['firstName'], $errors) && validateName($dataKeys[2], $data['lastName'], $errors)) {
+  if (validateName($dataKeys[1], $data['firstName'], $errors)) {
     $firstName = $data['firstName'];
-    $lastName = $data['lastName'];
+
+    if (strlen($data['lastName']) > 0) {
+      validateName($dataKeys[2], $data['lastName'], $errors);
+      $lastName = $data['lastName'];
+    }
   }
 
   if (!empty($data['emailGroup']['email'])) {
