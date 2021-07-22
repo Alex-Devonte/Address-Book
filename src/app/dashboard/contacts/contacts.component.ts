@@ -4,6 +4,7 @@ import { TokenStorageService } from '../../token-storage.service';
 import { ContactsService } from './contacts.service';
 import { environment } from 'src/environments/environment';
 
+
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
@@ -16,11 +17,17 @@ export class ContactsComponent implements OnInit {
   userId = this.tokenStorage.getToken().id;
   numberOfContacts = 0;
   placeholderSrc = environment.placeholderSrc;
+  searchTerm = "";
 
   constructor(private contactService: ContactsService, private tokenStorage: TokenStorageService) {
     this.contactService.refreshList$.subscribe(() => {
       this.getContactList();
     });
+  }
+
+  setSearchTerm(val: any) {
+    console.log(val);
+    this.searchTerm = val;
   }
 
   ngOnInit(): void {
