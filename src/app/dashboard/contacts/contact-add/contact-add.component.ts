@@ -5,6 +5,7 @@ import { TokenStorageService } from 'src/app/token-storage.service';
 import { ContactsService } from '../../contacts/contacts.service';
 import { FileUploader, FileItem, ParsedResponseHeaders } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
+import { MessageService } from 'src/app/message.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class ContactAddComponent implements OnInit {
   myFile: any;
   attachmentData: any;
 
-  constructor(private router: Router, private contactService: ContactsService, private tokenStorage: TokenStorageService) { }
+  constructor(private router: Router, private contactService: ContactsService, private tokenStorage: TokenStorageService, private messageService: MessageService) { }
 
   emails = [{
     id: 0,
@@ -98,6 +99,7 @@ export class ContactAddComponent implements OnInit {
     contactData.attachment = this.attachmentData;
 
     this.contactService.addContact(this.tokenStorage.getToken().id, contactData).subscribe(res => {
+      this.messageService.setMessage("Contact added successfully!");
       this.contactService.refreshContactList();
       this.router.navigate(['/dashboard']);
     });

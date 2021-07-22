@@ -1,0 +1,28 @@
+@import "styles.scss";
+
+.message {
+  background-color: $wild-blue-yonder;
+  box-shadow: 2px 5px 5px $slate-gray;
+  color: $rich-black-fogra-29;
+  border: 1px solid #000;
+  left: 50%;
+  padding: 25px;
+  position: absolute;
+  top: 10%;
+}
+
+.text {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .message {
+    left: 0;
+    margin: 0 auto;
+    right: 0;
+    text-align: center;
+    top: 20%;
+    width: 75%;
+  }
+}
+

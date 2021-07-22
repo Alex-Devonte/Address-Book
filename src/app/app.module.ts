@@ -24,6 +24,7 @@ import { ContactAddComponent } from './dashboard/contacts/contact-add/contact-ad
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploadModule } from 'ng2-file-upload';
 import { SearchPipe } from './dashboard/contacts/search.pipe';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SearchPipe } from './dashboard/contacts/search.pipe';
     DashboardComponent,
     HeaderComponent,
     ContactAddComponent,
-    SearchPipe
+    SearchPipe,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

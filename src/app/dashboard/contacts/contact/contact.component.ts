@@ -4,6 +4,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Contact } from 'src/app/shared/models/contact-model';
 import { ContactsService } from '../contacts.service';
 import { environment } from 'src/environments/environment';
+import { MessageService } from 'src/app/message.service';
 
 @Component({
   selector: 'app-contact',
@@ -12,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ContactComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService, private modal: NgbModal) { }
+  constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService, private modal: NgbModal, private messageService: MessageService) { }
   
   contact = [new Contact("","","","",[{id: "", email: "", emailType: ""}],[{id: "", phone: "", phoneType: ""}],"","")];
   @Output() close: EventEmitter<any> = new EventEmitter();
@@ -37,6 +38,7 @@ export class ContactComponent implements OnInit {
   deleteContact() {
    this.contactService.deleteContact(this.contact[0].id).subscribe(res => {
      this.modalRef.close();
+     this.messageService.setMessage("Contact successfully deleted.");
      this.contactService.refreshContactList();
      this.router.navigate(["/dashboard"]);
    });

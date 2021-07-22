@@ -7,6 +7,7 @@ import { FileUploader, FileItem, ParsedResponseHeaders } from 'ng2-file-upload';
 import { TokenStorageService } from 'src/app/token-storage.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/environments/environment';
+import { MessageService } from 'src/app/message.service';
 
 @Component({
   selector: 'app-contact-edit',
@@ -15,7 +16,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ContactEditComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService, private tokenStorage: TokenStorageService, private modal: NgbModal) { }
+  constructor(private route: ActivatedRoute, private router: Router, private contactService: ContactsService, private tokenStorage: TokenStorageService, private modal: NgbModal, private messageService: MessageService) { }
 
   contactData = [new Contact("","","","",[{id: "", email: "", emailType: ""}],[{id: "", phone: "", phoneType: ""}],"","")];
   imageSrc: any;
@@ -137,6 +138,7 @@ export class ContactEditComponent implements OnInit {
 
     this.contactService.editContact(this.contactData[0].id, formData).subscribe((res: any) => {
       if (!res.hasErrors) {
+        this.messageService.setMessage("Contact edited successfully");
         this.contactService.refreshContactList();
         this.router.navigate(["dashboard"]);
       }
