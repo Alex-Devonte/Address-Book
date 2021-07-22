@@ -48,6 +48,8 @@ yarn-error.log
 testem.log
 /typings
 /src/php/images
+php/
+src/php/images_tmp
 
 # System Files
 .DS_Store
