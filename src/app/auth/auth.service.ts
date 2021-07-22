@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment'
+import { environment } from '../../environments/environment';
+import { TokenStorageService } from '../token-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,14 @@ export class AuthService {
   registrationUrl = environment.registrationUrl;
   loginUrl = environment.loginUrl;
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
+
+  isAuthenticated(): boolean {
+    if(sessionStorage.getItem(this.tokenStorage.tokenKey) != null) {
+      return true;
+    }
+    return false;
+  }
 
   checkEmail(email: string) {
     return this.http.post(this.checkEmailUrl, email, {responseType: 'text'});
