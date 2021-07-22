@@ -1,9 +1,9 @@
 <div class="container float-md-left contact-list-container">
   <div class="search-container w-100">
-    <input type="search" class="form-control" placeholder="Search Contacts . . ." [disabled]="true" style="background-color: gray;">
+    <input type="search" class="form-control" placeholder="Search Contacts . . ." #search (keyup)="setSearchTerm(search.value)">
   </div>
   <ul id="contact-list">
-    <li *ngFor="let contact of contactList" class="contact">
+    <li *ngFor="let contact of contactList | search:search.value" class="contact">
     <a routerLink="contact/{{contact.id}}" class="contact-link" data-toggle="collapse" data-target=".navbar-collapse.show">
       <img *ngIf="contact.path == '' else content" class="contact-pic-thumb" src=" {{ placeholderSrc }}">
       <ng-template #content>
