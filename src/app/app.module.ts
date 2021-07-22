@@ -23,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ContactAddComponent } from './dashboard/contacts/contact-add/contact-add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploadModule } from 'ng2-file-upload';
+import { SearchPipe } from './dashboard/contacts/search.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     ConfirmPasswordDirective,
     DashboardComponent,
     HeaderComponent,
-    ContactAddComponent
+    ContactAddComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
