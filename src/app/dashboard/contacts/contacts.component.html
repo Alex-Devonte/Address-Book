@@ -4,7 +4,7 @@
   </div>
   <ul id="contact-list">
     <li *ngFor="let contact of contactList | search:search.value" class="contact">
-    <a routerLink="contact/{{contact.id}}" class="contact-link" data-toggle="collapse" data-target=".navbar-collapse.show">
+    <a routerLink="contact/{{contact.id}}" class="contact-link" data-toggle="collapse" data-target=".navbar-collapse.show" (click)="search.value = ''">
       <img *ngIf="contact.path == '' else content" class="contact-pic-thumb" src=" {{ placeholderSrc }}">
       <ng-template #content>
         <img class="contact-pic-thumb" src="{{ contact.path }}">
