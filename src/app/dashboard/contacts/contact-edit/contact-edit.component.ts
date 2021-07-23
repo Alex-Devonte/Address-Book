@@ -130,6 +130,8 @@ export class ContactEditComponent implements OnInit {
   saveChanges(form: NgForm) {
     const formData = form.value;
 
+    //Set picture path to prevent it from resetting to an empty string
+    formData.profilePic = this.contactData[0].path;
     formData.emailGroup = this.emails;
     formData.phoneGroup = this.phones;
 
