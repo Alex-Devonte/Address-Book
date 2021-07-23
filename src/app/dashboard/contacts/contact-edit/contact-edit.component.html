@@ -8,7 +8,7 @@
         <div class="row">
           <div class="col-sm-6 offset-sm-3 col-lg-6">
             <input type="file" ng2FileSelect [uploader]="uploader" (onFileSelected)="onFileSelected($event)" accept="image/*" class="form-control-file" id="profile-pic" name="profilePic" ngModel #profilePic="ngModel" (change)="showPreview($event)"> 
-            <img id="preview" [src]="imageSrc || 'assets/preview.png'" alt="preview" />
+            <img id="preview" [src]="contactData[0].path || imageSrc || 'assets/preview.png' " alt="preview" />
           </div>
         </div>
         <div class="form-row">
