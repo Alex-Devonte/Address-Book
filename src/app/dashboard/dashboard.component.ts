@@ -27,9 +27,9 @@ export class DashboardComponent implements OnInit, AfterContentChecked {
     this.showForm = !this.showForm;
   }
 
-  // logout() {
-  //   sessionStorage.clear();
-  //   this.router.navigate(['login']);
-  // }
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(['login']);
+  }
 
 }
